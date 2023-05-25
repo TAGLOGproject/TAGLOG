@@ -38,7 +38,17 @@
     "react/jsx-one-expression-per-line": 0,
     "no-nested-ternary": 0,
     "react-hooks/rules-of-hooks": "error", // Hook 규칙을 체크합니다.
-    "react-hooks/exhaustive-deps": "error" // useEffect의 의존성 배열을 체크합니다.
+    "react-hooks/exhaustive-deps": "error", // useEffect의 의존성 배열을 체크합니다.
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
   },
   "globals": {
     "React": "writable"
