@@ -1,5 +1,5 @@
 import { OperationVariables, Query, QueryResult } from 'react-apollo';
-import { GET_TODOS } from '../todo';
+import { GET_TODOS } from '../graphQl/todo';
 
 export default function Todos() {
   return (
