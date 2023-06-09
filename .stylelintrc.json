@@ -19,7 +19,7 @@
     "function-name-case": [
       "lower",
       {
-        "ignoreFunctions": "/^[a-z_](|[a-zA-Z0-9]+)$/"
+        "ignoreFunctions": ["/^[a-z_](|[a-zA-Z0-9]+)$/"]
       }
     ],
     "keyframes-name-pattern": "^[a-z][a-zA-Z0-9_]+$",
