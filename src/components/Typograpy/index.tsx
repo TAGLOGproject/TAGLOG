@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import styles from './typograph.module.scss';
+import styles from './typograpy.module.scss';
 
-interface ITypographProps {
+interface ITypograpyProps {
   variant:
     | 'h1'
     | 'h2'
@@ -19,7 +19,7 @@ interface ITypographProps {
   children: React.ReactNode;
 }
 
-function Typograph({ variant = 'span', children }: ITypographProps) {
+function Typograpy({ variant = 'span', children }: ITypograpyProps) {
   const getComponentAndClassName = (): [keyof JSX.IntrinsicElements, string] => {
     switch (variant) {
       case 'h1':
@@ -57,4 +57,4 @@ function Typograph({ variant = 'span', children }: ITypographProps) {
   return <Component className={className}>{children}</Component>;
 }
 
-export default Typograph;
+export default Typograpy;
