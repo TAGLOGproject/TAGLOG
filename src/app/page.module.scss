@@ -5,7 +5,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
     height: 96px;
     background-color: aqua;
   }
@@ -17,18 +16,22 @@
     justify-content: space-between;
     align-items: center;
     line-height: 52px;
+    @media (max-width: 1280px) {
+      margin: 16px;
+    }
+    @media (max-width: 768px) {
+      margin: 24px;
+    }
   }
   .title {
     font-weight: 900;
     font-size: 32px;
     color: var(--color-black);
-  }
-  .toggleButton {
-    width: 117px;
-    height: 51px;
-    font-size: 13px;
-    border-radius: 4px;
-    background-color: var(--color-black);
-    color: var(--color-white);
+    @media (max-width: 1280px) {
+      font-size: 24px;
+    }
+    @media (max-width: 768px) {
+      margin: 16px;
+    }
   }
 }
