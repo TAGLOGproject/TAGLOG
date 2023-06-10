@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React from 'react';
+
 import styles from './typography.module.scss';
 
 interface ITypographyProps {
