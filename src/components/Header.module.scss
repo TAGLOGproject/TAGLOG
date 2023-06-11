@@ -1,0 +1,32 @@
+.headerContainer {
+  width: 100%;
+  min-width: 360px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  background-color: var(--color-white);
+}
+.headerWrapper {
+  width: 100%;
+  max-width: 1248px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 52px;
+  padding: 0px 16px;
+  background-color: var(--color-white);
+}
+.title {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--color-black);
+  @media (max-width: 1280px) {
+    font-size: 24px;
+  }
+  @media (max-width: 768px) {
+    margin: 16px;
+  }
+}
