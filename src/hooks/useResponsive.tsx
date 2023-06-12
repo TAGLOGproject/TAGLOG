@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 
 const useResponsive = () => {
   const [isDesktop, setIsDesktop] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => {
-      const isDesktopWidth = window.innerWidth > 768;
+      const { innerWidth } = window;
+      const isDesktopWidth = innerWidth > 768;
       setIsDesktop(isDesktopWidth);
+      setWindowWidth(innerWidth);
     };
 
     handleResize();
@@ -17,7 +20,7 @@ const useResponsive = () => {
     };
   }, []);
 
-  return { isDesktop };
+  return { isDesktop, windowWidth };
 };
 
 export default useResponsive;
