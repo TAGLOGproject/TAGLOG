@@ -1,5 +1,14 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 
+/**
+ * useResponsive
+ * @description 반응형 웹을 위한 커스텀 훅
+ * isDesktop: 데스크탑 여부
+ * windowWidth: 창 너비
+ * @returns {object} { isDesktop: boolean, windowWidth: number }
+ */
 const useResponsive = () => {
   const [isDesktop, setIsDesktop] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
