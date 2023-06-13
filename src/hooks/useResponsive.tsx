@@ -1,5 +1,6 @@
 'use client';
 
+import { TABLET_WIDTH } from '@/constants';
 import { useEffect, useState } from 'react';
 
 /**
@@ -16,7 +17,7 @@ const useResponsive = () => {
   useEffect(() => {
     const handleResize = () => {
       const { innerWidth } = window;
-      const isDesktopWidth = innerWidth > 768;
+      const isDesktopWidth = innerWidth > TABLET_WIDTH;
       setIsDesktop(isDesktopWidth);
       setWindowWidth(innerWidth);
     };
