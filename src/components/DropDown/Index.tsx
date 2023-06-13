@@ -1,6 +1,6 @@
 'use client';
 
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './DropDown.module.scss';
 import Hamburger from '../../assets/svg/hamburger.svg';
 
