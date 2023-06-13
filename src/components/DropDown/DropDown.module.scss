@@ -1,0 +1,18 @@
+.DropDownContainer {
+  position: relative;
+}
+.DropDownWrapper {
+  position: absolute;
+  border: 2px solid var(--color-gray-a);
+  right: 0px;
+  width: 144px;
+  height: 144px;
+  padding: 12px 16px;
+}
+.DropDownMenu {
+  cursor: pointer;
+  &:hover {
+    font-weight: bolder;
+    color: var(--color-cy-5);
+  }
+}
