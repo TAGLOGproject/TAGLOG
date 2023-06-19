@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import '../styles/global.scss';
+import 'react-quill/dist/quill.snow.css';
 
 export const metadata = {
   title: 'TAGLOG',
