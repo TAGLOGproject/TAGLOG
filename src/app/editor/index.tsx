@@ -8,11 +8,6 @@ const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
   loading: () => <p>Loading ...</p>,
 });
 
-const QuillWrapper = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
-
 const modules = {
   toolbar: [
     [{ header: '1' }, { header: '2' }, { header: '3' }, { header: '4' }, { font: [] }],
