@@ -1,6 +1,6 @@
 'use client';
 
-import TextEditor from '@/components/TextEditor';
+import TextEditor from '@/app/editor';
 
 export default function Home(props: any) {
   return (
