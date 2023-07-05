@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-interface IPost {
+export interface IPost {
   id: string;
   title: string;
   body: string;
