@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
