@@ -1,5 +1,6 @@
 import connectDb from '@/app/lib/dbConnect';
 import Contact from '@/models/Contact';
+
 import mongoose from 'mongoose';
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -16,7 +17,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       const errorList = Object.values(error.errors).map((err: any) => err.message);
-      return NextResponse.ㅌjson({ msg: errorList, success: false });
+      return NextResponse.json({ msg: errorList, success: false });
     }
   }
 }
