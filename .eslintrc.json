@@ -53,5 +53,6 @@
   },
   "globals": {
     "React": "writable"
-  }
+  },
+  "ignorePatterns": ["jest.setup.js", "jest.config.js"]
 }
