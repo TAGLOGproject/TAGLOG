@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import styles from './DropDown.module.scss';
+import styles from './dropDown.module.scss';
 import Hamburger from '../../assets/svg/hamburger.svg';
 
 function DropDown() {
@@ -31,13 +31,13 @@ function DropDown() {
   }, []);
 
   return (
-    <div className={styles.DropDownContainer} ref={dropDownRef}>
+    <div className={styles.dropDownContainer} ref={dropDownRef}>
       <Hamburger onClick={onOpenDropDown} />
       {isDropDownOpen && (
-        <ul className={styles.DropDownWrapper}>
-          <li className={styles.DropDownMenu}>settings</li>
-          <li className={styles.DropDownMenu}>내가 작성한 글</li>
-          <li className={styles.DropDownMenu}>로그아웃</li>
+        <ul className={styles.dropDownWrapper}>
+          <li className={styles.dropDownMenu}>settings</li>
+          <li className={styles.dropDownMenu}>내가 작성한 글</li>
+          <li className={styles.dropDownMenu}>로그아웃</li>
         </ul>
       )}
     </div>
