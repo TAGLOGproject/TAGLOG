@@ -1,5 +1,6 @@
 'use client';
 
+import SideBar from '@/components/SideBar';
 import { useState } from 'react';
 
 export default function Home(props: any) {
@@ -32,6 +33,7 @@ export default function Home(props: any) {
       <button type="button" onClick={getApi}>
         ddd
       </button>
+
       <form onSubmit={onSubmit}>
         <div>
           <label htmlFor="name">
