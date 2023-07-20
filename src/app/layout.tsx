@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import '../styles/global.scss';
 import 'react-quill/dist/quill.snow.css';
+import Layout from '@/components/Layout';
 
 export const metadata = {
   title: 'TAGLOG',
@@ -11,8 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
+        <Layout>{children}</Layout>
       </body>
     </html>
   );

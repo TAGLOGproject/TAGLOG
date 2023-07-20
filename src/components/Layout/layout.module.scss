@@ -1,0 +1,15 @@
+.contentsWrapper {
+  display: flex;
+  max-width: 1280px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: rebeccapurple;
+}
+
+.mainWrapper {
+  width: 100%;
+  padding: 80px 18px 0;
+  @media (width <= 768px) {
+    padding-top: 16px;
+  }
+}
