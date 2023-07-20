@@ -1,5 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/require-default-props */
 import React from 'react';
 
+import classNames from 'classnames';
 import styles from './typography.module.scss';
 
 interface ITypographyProps {
@@ -17,10 +20,11 @@ interface ITypographyProps {
     | 'body3'
     | 'body4'
     | 'span';
+  className?: string;
   children: React.ReactNode;
 }
 
-function Typography({ variant = 'span', children }: ITypographyProps) {
+function Typography({ variant = 'span', className, children }: ITypographyProps) {
   const getComponentAndClassName = (): [keyof JSX.IntrinsicElements, string] => {
     switch (variant) {
       case 'h1':
@@ -53,9 +57,11 @@ function Typography({ variant = 'span', children }: ITypographyProps) {
     }
   };
 
-  const [Component, className] = getComponentAndClassName();
+  const [Component, defaultClassName] = getComponentAndClassName();
 
-  return <Component className={className}>{children}</Component>;
+  const combinedClassName = classNames(defaultClassName, className); // 기존 className과 추가 className을 결합
+
+  return <Component className={combinedClassName}>{children}</Component>;
 }
 
 export default Typography;
