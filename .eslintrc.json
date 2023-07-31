@@ -39,6 +39,7 @@
     "no-nested-ternary": 0,
     "react-hooks/rules-of-hooks": "error", // Hook 규칙을 체크합니다.
     "react-hooks/exhaustive-deps": "error", // useEffect의 의존성 배열을 체크합니다.
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js"]}],
     "import/prefer-default-export": "off",
     "import/extensions": [
       "error",
