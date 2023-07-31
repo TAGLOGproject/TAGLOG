@@ -142,3 +142,17 @@ button {
   cursor: pointer;
   background: transparent;
 }
+
+html {
+  --color-primary: #f8f9fa;
+  --color-secondary: #e9ecef;
+  --color-heighlight: #121212;
+  --color-overlay: #2e2e2e;
+}
+
+html[data-theme='dark'] {
+  --color-primary: #1e1e1e;
+  --color-secondary: #121212;
+  --color-heighlight: #e9ecef;
+  --color-overlay: #dee2e6;
+}
