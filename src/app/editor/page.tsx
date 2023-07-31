@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 
@@ -16,11 +16,32 @@ export default function Editor() {
     setMdEditorContents(text);
   };
 
-  const onCustomImageUpload = (event: File) => {
-    return new Promise((resolve, reject) => {
-      const imgMdUrl = 'hello';
-      resolve(imgMdUrl);
+  const onCustomImageUpload = async (file: File) => {
+    const fileName = encodeURIComponent(file.name);
+    const fileType = encodeURIComponent(file.type);
+
+    const res = await fetch(`/api/imgupload?file=${fileName}&fileType=${fileType}`);
+    const { url, fields, imgUrl } = await res.json();
+
+    const formData = new FormData();
+
+    Object.entries({ ...fields, file }).forEach(([key, value]) => {
+      formData.append(key, value as string);
     });
+
+    const upload = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (upload.ok) {
+      return new Promise((resolve) => {
+        const imgMdUrl = imgUrl;
+        resolve(imgMdUrl);
+      });
+    }
+
+    throw new Error('Upload failed.');
   };
 
   return (
