@@ -6,6 +6,12 @@ const nextConfig = {
     esmExternals: 'loose',
     serverComponentsExternalPackages: ['mongoose'],
   },
+  images: {
+    domains: [
+      'taglog-image-uploader.s3.ap-northeast-2.amazonaws.com',
+      'taglog-image-uploader.s3.amazonaws.com',
+    ],
+  },
   future: {
     webpack5: false, // 또는 false
   },
