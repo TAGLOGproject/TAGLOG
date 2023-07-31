@@ -1,5 +1,4 @@
 import SideBar from '../SideBar';
-import Header from '../Header';
 import styles from './layout.module.scss';
 
 function Layout({ children }: { children: React.ReactNode }) {
