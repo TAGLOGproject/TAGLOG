@@ -1,5 +1,5 @@
 import SideBar from '../SideBar';
-import DarkModeToggleButton from '../DarkModeToggleButton';
+import ToggleThemeButton from '../ToggleThemeButton';
 import styles from './layout.module.scss';
 
 function Layout({ children }: { children: React.ReactNode }) {
@@ -7,7 +7,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div>
       {/* <Header /> */}
       <div className={styles.contentsWrapper}>
-        <DarkModeToggleButton />
+        <ToggleThemeButton />
         <SideBar />
         <div className={styles.mainWrapper}>{children}</div>
       </div>

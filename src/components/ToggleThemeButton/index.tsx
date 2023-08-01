@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import styles from './darkModeToggleButton.module.scss';
+import styles from './toggleThemeButton.module.scss';
 
-export default function DarkModeToggleButton() {
+export default function ToggleThemeButton() {
   const [theme, setTheme] = useState<string>('light');
 
   const onToggleTheme = () => {
