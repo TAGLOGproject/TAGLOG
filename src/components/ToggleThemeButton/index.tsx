@@ -1,21 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import useToggleTheme from '@/hooks/useToggleTheme';
 import styles from './toggleThemeButton.module.scss';
 
 export default function ToggleThemeButton() {
-  const [theme, setTheme] = useState<string>('light');
-
-  const onToggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-  };
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
+  const { theme, onToggleTheme } = useToggleTheme();
   return (
     <button type="button" onClick={onToggleTheme} className={styles.toggleThemeBtn}>
       {theme === 'light' ? (
