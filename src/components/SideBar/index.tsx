@@ -1,7 +1,9 @@
 import Image from 'next/image';
+import { ROUTES } from '@/constants';
 import SnsButtons from '../SnsButtons';
 import styles from './sidebar.module.scss';
 import Typography from '../Typography';
+import SideBarLink from './SideBarLink';
 
 interface IUerData {
   name: string;
@@ -57,7 +59,12 @@ export default function SideBar() {
       </Typography>
       <div className={styles.sidebarButtons}>
         {MOCKDATA.sns.map((v) => {
-          return <SnsButtons type={v.type} uri={v.uri} />;
+          return <SnsButtons key={v.uri} type={v.type} uri={v.uri} />;
+        })}
+      </div>
+      <div className={styles.routesContainer}>
+        {ROUTES.map((v) => {
+          return <SideBarLink href={v.path} name={v.name} />;
         })}
       </div>
     </aside>
