@@ -5,4 +5,15 @@ const MOBILE_WIDTH = 360;
 
 const SIDEBAR_MENUS = ['POST', 'ABOUT', 'ETC'];
 
-export { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH };
+// 라우팅
+const ROUTES = [
+  { path: '/', name: 'HOME' },
+  { path: '/cardView', name: 'CARDVIEW' },
+  { path: '/calculator', name: 'POST' },
+  { path: '/about', name: 'ABOUT' },
+  { path: '/editor', name: 'EDITOR' },
+  // 임시
+  { path: '/calculator', name: 'Calculator' },
+];
+
+export { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH, ROUTES };
