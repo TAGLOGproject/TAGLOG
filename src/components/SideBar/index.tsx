@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { ROUTES } from '@/constants';
+import ToggleThemeButton from '../ToggleThemeButton';
 import SnsButtons from '../SnsButtons';
 import styles from './sidebar.module.scss';
 import Typography from '../Typography';
@@ -34,6 +35,7 @@ const MOCKDATA: IUerData = {
 export default function SideBar() {
   return (
     <aside className={styles.sidebarContainer}>
+      <ToggleThemeButton />
       <Typography variant="h3" className={styles.sidebarTitle}>
         눈에 띄지 않는 것의 가치
       </Typography>
