@@ -1,3 +1,5 @@
+/* eslint-disable react/no-children-prop */
+
 'use client';
 
 import { useState } from 'react';
@@ -10,7 +12,7 @@ import MarkdownIt from 'markdown-it';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 export default function Editor() {
-  const [mdEditorContents, setMdEditorContents] = useState<string>();
+  const [mdEditorContents, setMdEditorContents] = useState<string>('');
 
   const handleEditorChange = ({ text }: { text: string }) => {
     setMdEditorContents(text);
@@ -48,12 +50,11 @@ export default function Editor() {
     <div>
       <MdEditor
         value={mdEditorContents}
-        style={{ height: '500px' }}
+        style={{ height: '700px' }}
         onChange={handleEditorChange}
         renderHTML={(text) => mdParser.render(text)}
         onImageUpload={onCustomImageUpload}
       />
-      {mdEditorContents}
     </div>
   );
 }
