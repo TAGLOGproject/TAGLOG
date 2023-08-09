@@ -1,7 +1,7 @@
-import Header from '@/components/Header';
 import '../styles/global.scss';
 import 'react-quill/dist/quill.snow.css';
 import Layout from '@/components/Layout';
+import { Providers } from '@/store/redux/Provider';
 
 export const metadata = {
   title: 'TAGLOG',
@@ -12,7 +12,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <Layout>{children}</Layout>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   );
