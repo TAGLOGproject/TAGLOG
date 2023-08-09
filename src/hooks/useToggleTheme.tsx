@@ -1,17 +1,14 @@
 'use client';
 
-import { useAppDispatch, useAppSelector } from '@/store/redux';
-import { toggleTheme } from '@/store/redux/slice/themeSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useToggleTheme = () => {
-  const theme = useAppSelector((state) => state.themeReducer.theme);
-  const dispatch = useAppDispatch();
+  const [theme, setTheme] = useState<string>('light');
 
   const onToggleTheme = () => {
-    dispatch(toggleTheme());
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
   };
-
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
