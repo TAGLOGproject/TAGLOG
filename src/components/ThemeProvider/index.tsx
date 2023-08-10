@@ -1,14 +1,14 @@
-import { useAppSelector } from '@/store/redux';
-import { ReactNode, useEffect } from 'react';
+// import { useAppSelector } from '@/store/redux';
+// import { ReactNode, useEffect } from 'react';
 
-function ThemeProvider({ children }: { children: ReactNode }): JSX.Element {
-  const { theme } = useAppSelector((state) => state.themeState);
+// function ThemeProvider({ children }: { children: ReactNode }): JSX.Element {
+//   const { theme } = useAppSelector((state) => state.themeState);
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+//   useEffect(() => {
+//     document.documentElement.setAttribute('data-theme', theme);
+//   }, [theme]);
 
-  return <div>{children}</div>;
-}
+//   return <div>{children}</div>;
+// }
 
-export default ThemeProvider;
+// export default ThemeProvider;
