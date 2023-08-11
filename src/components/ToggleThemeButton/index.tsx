@@ -1,21 +1,21 @@
 'use client';
 
 import Image from 'next/image';
-import { useAppDispatch, useAppSelector } from '@/store/redux';
-import { toggleTheme } from '@/store/redux/slice/themeSlice';
+import useThemeStore from '@/store/zustand/useThemeStore';
+
+import useStore from '@/store/zustand/useStore';
 import styles from './toggleThemeButton.module.scss';
 
 export default function ToggleThemeButton() {
-  const { theme } = useAppSelector((state) => state.themeState);
+  const theme = useStore(useThemeStore, (state) => state.theme);
+  const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
-  const dispatch = useAppDispatch();
-
-  const onToggleTheme = () => {
-    dispatch(toggleTheme());
+  const handleButtonClick = () => {
+    toggleTheme();
   };
 
   return (
-    <button type="button" onClick={onToggleTheme} className={styles.toggleThemeBtn}>
+    <button type="button" onClick={handleButtonClick} className={styles.toggleThemeBtn}>
       {theme === 'light' ? (
         <Image src="/svgs/dark.svg" alt="toggleButton" width={48} height={48} />
       ) : (
