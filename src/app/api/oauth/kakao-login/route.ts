@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { NextApiRequest, NextApiResponse } from 'next';
 import connectDb from '@/app/lib/dbConnect';
 import Contact from '@/models/Contact';
+import { KAKAO_CLIENT_ID, TOKEN_URL } from '@/utils/oauth';
 
 interface TokenResponse {
   token_type: string;
@@ -20,17 +21,32 @@ interface UserInfo {
   connected_at: string;
   properties: {
     nickname: string;
-    profile_image?: string; // 640x640
-    thumbnail_image?: string; // 110x110
+    profile_image: string;
+    thumbnail_image: string;
+  };
+  kakao_account: {
+    profile_nickname_needs_agreement: boolean;
+    profile_image_needs_agreement: boolean;
+    profile: any;
+    has_email: boolean;
+    email_needs_agreement: boolean;
+    is_email_valid: boolean;
+    is_email_verified: boolean;
+    email: string;
+    has_birthday: boolean;
+    birthday_needs_agreement: boolean;
+    birthday: string;
+    birthday_type: 'SOAR' | 'LUNAR';
   };
 }
 
 async function getTokenFromKakao(authCode: string) {
-  const tokenUrl = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.KAKAO_RESTAPI_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&code=${authCode}`;
+  const tokenUrl = TOKEN_URL(authCode);
   const response: TokenResponse = await fetch(tokenUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   }).then((res) => res.json());
+
   return response;
 }
 
@@ -46,34 +62,15 @@ async function getUserFromKakao({ access_token }: TokenResponse) {
 }
 
 export async function POST(req: NextRequest) {
-  const { name, email, message } = await req.json();
-  try {
-    await connectDb();
-    await Contact.create({ name, email, message });
-    return NextResponse.json({
-      msg: ['hi'],
-      success: true,
-    });
-  } catch (error) {
-    if (error instanceof mongoose.Error.ValidationError) {
-      const errorList = Object.values(error.errors).map((err: any) => err.message);
-      return NextResponse.json({ msg: errorList, success: false });
-    }
-  }
-}
+  const { authCode } = await req.json(); // 인가 코드
 
-export async function GET(req: NextRequest) {
-  try {
-    await connectDb();
-    const data = await Contact.find();
-    return NextResponse.json({
-      data,
-      success: true,
-    });
-  } catch (error) {
-    if (error instanceof mongoose.Error.ValidationError) {
-      const errorList = Object.values(error.errors).map((err: any) => err.message);
-      return NextResponse.json({ msg: errorList, success: false });
-    }
-  }
+  const tokenResponse = await getTokenFromKakao(authCode);
+  // 유저 정보 받아오기
+  const userInfo = await getUserFromKakao(tokenResponse);
+  const {
+    id,
+    properties: { nickname, profile_image, thumbnail_image },
+    kakao_account: { email, birthday, birthday_type },
+  } = userInfo;
+  return NextResponse.json({ success: 'true' });
 }
