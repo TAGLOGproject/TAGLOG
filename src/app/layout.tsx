@@ -1,6 +1,6 @@
+import Provider from '@/components/Provider';
 import '../styles/global.scss';
 import Layout from '@/components/Layout';
-import { Providers } from '@/store/redux/Provider';
 
 export const metadata = {
   title: 'TAGLOG',
@@ -11,9 +11,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <Providers>
+        <Provider>
           <Layout>{children}</Layout>
-        </Providers>
+        </Provider>
       </body>
     </html>
   );
