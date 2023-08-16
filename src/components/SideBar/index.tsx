@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import { ROUTES } from '@/constants';
+import useModalStore from '@/store/zustand/useModalStore';
 import ToggleThemeButton from '../ToggleThemeButton';
 import SnsButtons from '../SnsButtons';
 import styles from './sidebar.module.scss';
@@ -32,9 +35,19 @@ const MOCKDATA: IUerData = {
     { type: 'mail', uri: 'https://github.com/anshqhsh' },
   ],
 };
+
 export default function SideBar() {
+  const setModal = useModalStore((state) => state.setModal);
+
+  const handleModal = () => {
+    setModal();
+  };
+
   return (
     <aside className={styles.sidebarContainer}>
+      <button type="button" onClick={handleModal}>
+        로그인
+      </button>
       <ToggleThemeButton />
       <Typography variant="h3" className={styles.sidebarTitle}>
         눈에 띄지 않는 것의 가치
