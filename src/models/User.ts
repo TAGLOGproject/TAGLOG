@@ -73,6 +73,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  refreshToken: {
+    type: String,
+    required: false,
+  },
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);
