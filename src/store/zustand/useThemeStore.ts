@@ -6,8 +6,8 @@ export type persistState = {
   toggleTheme: () => void;
 };
 
-const useThemeStore = create<any>(
-  persist<persistState>(
+const useThemeStore = create<persistState>()(
+  persist(
     (set, get) => ({
       theme: 'light',
       toggleTheme: () => set({ theme: get().theme === 'light' ? 'dark' : 'light' }),

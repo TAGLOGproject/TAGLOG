@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import styles from './dropDown.module.scss';
-import Hamburger from '../../assets/svg/hamburger.svg';
 
 function DropDown() {
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
@@ -32,7 +32,13 @@ function DropDown() {
 
   return (
     <div className={styles.dropDownContainer} ref={dropDownRef}>
-      <Hamburger onClick={onOpenDropDown} />
+      <Image
+        src="/svg/hamberger.svg"
+        alt="hamberger"
+        width={16}
+        height={16}
+        onClick={onOpenDropDown}
+      />
       {isDropDownOpen && (
         <ul className={styles.dropDownWrapper}>
           <li className={styles.dropDownMenu}>settings</li>
