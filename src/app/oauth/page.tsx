@@ -1,31 +1,32 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
-import axiosInstance from '@/utils/axios';
+
+import { postKakaoAuthApi } from '@/service/sign';
 
 export default function OAuth() {
   const searchParams = useSearchParams();
 
   const authCode = searchParams?.get('code');
-  const getAccessTokenAndRedirect = useCallback(async () => {
-    const data = await axiosInstance.post('/auth/kakao-login', { authCode });
-  }, [authCode]);
 
-  const getApi = async () => {
-    const data = await fetch('/api/contact');
-  };
+  const router = useRouter();
+
+  const postKakaoAuth = useCallback(async () => {
+    try {
+      if (authCode) {
+        const data = await postKakaoAuthApi({ authCode });
+        console.log(data);
+        router.push('/');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [authCode, router]);
 
   useEffect(() => {
-    getAccessTokenAndRedirect();
-  }, [getAccessTokenAndRedirect]);
+    postKakaoAuth();
+  }, [postKakaoAuth]);
 
-  return (
-    <div>
-      <button type="button" onClick={getApi}>
-        dddss
-      </button>
-      {authCode}
-    </div>
-  );
+  return <div>{authCode}</div>;
 }
