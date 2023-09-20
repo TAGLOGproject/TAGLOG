@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
 
 import { postKakaoAuthApi } from '@/service/sign';
+import { getAccessToken, setAccessToken } from '@/utils/localstorage';
 
 export default function OAuth() {
   const searchParams = useSearchParams();
@@ -16,7 +17,10 @@ export default function OAuth() {
     try {
       if (authCode) {
         const data = await postKakaoAuthApi({ authCode });
-        console.log(data);
+        const { accessToken } = data;
+        setAccessToken(accessToken);
+        // set > get이 잘 동작하는지 확인하기 위한 코드
+        getAccessToken();
         router.push('/');
       }
     } catch (error) {
