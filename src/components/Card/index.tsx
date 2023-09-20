@@ -106,12 +106,7 @@ function Card() {
         {cardList.map((card) => (
           <div className={styles.card} key={card.id}>
             <div className={styles.cardImageWrapper}>
-              <Image
-                className={styles.image}
-                src="https://velog.velcdn.com/images/ssori0421/post/a2df4fe0-7609-418e-9394-28987bcb2201/image.jpeg"
-                alt="card"
-                fill
-              />
+              <Image className={styles.image} src="/cardImage.jpeg" alt="card" fill />
             </div>
 
             <h1 className={styles.title}>{card.title}</h1>

@@ -1,9 +1,10 @@
+import mongoose from 'mongoose';
+import { NextRequest, NextResponse } from 'next/server';
+
+import { cookies } from 'next/headers';
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import connectDb from '@/app/lib/dbConnect';
 import Contact from '@/models/Contact';
-
-import mongoose from 'mongoose';
-
-import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const { name, email, message } = await req.json();
@@ -23,6 +24,10 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
+  const cookieStore = cookies();
+  const refreshToken = cookieStore.get('refreshToken') as RequestCookie;
+  console.log('/contact, refreshToken: ', refreshToken);
+
   try {
     await connectDb();
     const data = await Contact.find();

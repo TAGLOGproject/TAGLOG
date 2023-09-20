@@ -2,8 +2,9 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { KAKAO_AUTH_URL } from '@/constants/oauth';
+
 import useModalStore from '@/store/zustand/useModalStore';
+import { KAKAO_AUTH_URL } from '@/constants/backend';
 import styles from './modal.module.scss';
 
 export default function Modal() {

@@ -1,6 +1,6 @@
 // TODO: 소셜 로그인 UI
-import { KAKAO_AUTH_URL } from '@/constants/oauth';
 import React from 'react';
+import { KAKAO_AUTH_URL } from '@/constants/backend';
 
 export default function SignIn() {
   return (
