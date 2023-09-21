@@ -74,12 +74,12 @@ export default function SideBar() {
       </Typography>
       <div className={styles.sidebarButtons}>
         {MOCKDATA.sns.map((v) => {
-          return <SnsButtons key={v.uri} type={v.type} uri={v.uri} />;
+          return <SnsButtons key={v.type} type={v.type} uri={v.uri} />;
         })}
       </div>
       <div className={styles.routesContainer}>
         {ROUTES.map((v) => {
-          return <SideBarLink href={v.path} name={v.name} />;
+          return <SideBarLink key={v.name} href={v.path} name={v.name} />;
         })}
       </div>
     </aside>
