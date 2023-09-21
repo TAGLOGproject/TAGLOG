@@ -1,7 +1,7 @@
 'use client';
 
 import DropDown from '../DropDown/Index';
-import styles from './header.module.scss';
+import styles from './Header.module.scss';
 
 function Header() {
   return (

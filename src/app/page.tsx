@@ -1,31 +1,28 @@
 'use client';
 
-import SideBar from '@/components/SideBar';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
-export default function Home(props: any) {
+export default function Home() {
   const [formValue, setFormValue] = useState({
     name: '',
     email: '',
     message: '',
   });
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('submit', e);
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formValue),
-    });
-    const { msg } = await res.json();
-    alert(msg);
+
+    // const res = await fetch('/api/contact', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(formValue),
+    // });
+    // const { msg } = await res.json();
   };
   const getApi = async () => {
-    const data = await fetch('/api/contact');
-    alert(data.json());
+    // const data = await fetch('/api/contact');
   };
 
   return (
