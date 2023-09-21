@@ -24,7 +24,7 @@ export default function OAuth() {
         router.push('/');
       }
     } catch (error) {
-      console.error(error);
+      throw Error();
     }
   }, [authCode, router]);
 

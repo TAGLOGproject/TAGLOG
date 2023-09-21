@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { cookies } from 'next/headers';
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import connectDb from '@/app/lib/dbConnect';
 import Contact from '@/models/Contact';
 
@@ -17,19 +15,16 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
-      const errorList = Object.values(error.errors).map((err: any, index) => ({
-        key: index, // 각 요소에 key 추가
-        message: err.message,
-      }));
+      const errorList = Object.values(error.errors).map((err) => err.message);
       return NextResponse.json({ msg: errorList, success: false });
     }
   }
 }
 
-export async function GET(req: NextRequest) {
-  const cookieStore = cookies();
-  const refreshToken = cookieStore.get('refreshToken') as RequestCookie;
-  console.log('/contact, refreshToken: ', refreshToken);
+export async function GET() {
+  // TODO: refresh token으로 accessToken 재발급
+  // const cookieStore = cookies();
+  // const refreshToken = cookieStore.get('refreshToken') as RequestCookie;
 
   try {
     await connectDb();
@@ -39,12 +34,10 @@ export async function GET(req: NextRequest) {
       success: true,
     });
   } catch (error) {
-    if (error instanceof mongoose.Error.ValidationError) {
-      const errorList = Object.values(error.errors).map((err: any, index) => ({
-        key: index, // 각 요소에 key 추가
-        message: err.message,
-      }));
-      return NextResponse.json({ msg: errorList, success: false });
-    }
+    // if (error instanceof mongoose.Error.ValidationError) {
+    //   const errorList = Object.values(error.errors).map((err) => err.message);
+    //   return NextResponse.error().json();
+    // }
+    return NextResponse.error().json();
   }
 }

@@ -12,9 +12,6 @@ const nextConfig = {
       'taglog-image-uploader.s3.amazonaws.com',
     ],
   },
-  future: {
-    webpack5: false, // 또는 false
-  },
   webpack: (config) => {
     // eslint-disable-next-line no-param-reassign
     config.experiments = { ...config.experiments, topLevelAwait: true };
