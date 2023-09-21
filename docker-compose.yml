@@ -1,0 +1,11 @@
+version: '3'
+services:
+  next:
+    container_name: 'taglog'
+    restart: 'on-failure'
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - '80:3000'
+    env_file:
+      - .env.development
