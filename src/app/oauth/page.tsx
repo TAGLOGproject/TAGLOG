@@ -1,30 +1,36 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
+
+import { postKakaoAuthApi } from '@/service/sign';
+import { getAccessToken, setAccessToken } from '@/utils/localstorage';
 
 export default function OAuth() {
   const searchParams = useSearchParams();
 
   const authCode = searchParams?.get('code');
-  const getAccessTokenAndRedirect = useCallback(async () => {
-    // const data = await axiosInstance.post('/auth/kakao-login', { authCode });
-  }, []);
 
-  const getApi = async () => {
-    // const data = await fetch('/api/contact');
-  };
+  const router = useRouter();
+
+  const postKakaoAuth = useCallback(async () => {
+    try {
+      if (authCode) {
+        const data = await postKakaoAuthApi({ authCode });
+        const { accessToken } = data;
+        setAccessToken(accessToken);
+        // set > get이 잘 동작하는지 확인하기 위한 코드
+        getAccessToken();
+        router.push('/');
+      }
+    } catch (error) {
+      throw Error();
+    }
+  }, [authCode, router]);
 
   useEffect(() => {
-    getAccessTokenAndRedirect();
-  }, [getAccessTokenAndRedirect]);
+    postKakaoAuth();
+  }, [postKakaoAuth]);
 
-  return (
-    <div>
-      <button type="button" onClick={getApi}>
-        dddss
-      </button>
-      {authCode}
-    </div>
-  );
+  return <div>{authCode}</div>;
 }

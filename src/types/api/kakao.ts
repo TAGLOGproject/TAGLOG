@@ -31,3 +31,8 @@ export interface KakaoUserInfo {
     birthday_type: 'SOAR' | 'LUNAR';
   };
 }
+
+export interface IKakaoRes {
+  success: boolean;
+  accessToken: string;
+}

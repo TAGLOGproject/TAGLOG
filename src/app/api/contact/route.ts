@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { cookies } from 'next/headers';
 import connectDb from '@/app/lib/dbConnect';
 import Contact from '@/models/Contact';
 

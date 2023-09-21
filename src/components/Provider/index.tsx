@@ -16,7 +16,7 @@ function Provider({ children }: { children: React.ReactNode }) {
   return (
     <div>
       {children}
-      {isModalOpen ? <Modal /> : ''}
+      {isModalOpen ? <Modal /> : null}
     </div>
   );
 }
