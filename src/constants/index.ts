@@ -12,6 +12,6 @@ export const ROUTES = [
   { path: '/calculator', name: 'POST' },
   { path: '/about', name: 'ABOUT' },
   { path: '/editor', name: 'EDITOR' },
-  // 임시
-  { path: '/calculator', name: 'Calculator' },
 ];
+
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
