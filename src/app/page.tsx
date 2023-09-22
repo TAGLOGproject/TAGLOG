@@ -30,7 +30,6 @@ export default function Home() {
       <button type="button" onClick={getApi}>
         ddd
       </button>
-
       <form onSubmit={onSubmit}>
         <div>
           <label htmlFor="name">

@@ -701,6 +701,8 @@
   dependencies:
     "@babel/template" "^7.22.5"
     "@babel/types" "^7.22.5"
+    "@babel/template" "^7.22.5"
+    "@babel/types" "^7.22.5"
 
 "@babel/helper-hoist-variables@^7.22.5":
   version "7.22.5"
@@ -3784,6 +3786,7 @@ css-shorthand-properties@^1.0.0:
   resolved "https://registry.yarnpkg.com/css-shorthand-properties/-/css-shorthand-properties-1.1.1.tgz#1c808e63553c283f289f2dd56fcee8f3337bd935"
   integrity sha512-Md+Juc7M3uOdbAFwOYlTrccIZ7oCFuzrhKYQjdeUEW/sE1hv17Jp/Bws+ReOPpGVBTYCBoYo+G17V5Qo8QQ75A==
 
+css-tree@^2.2.1, css-tree@^2.3.1:
 css-tree@^2.2.1, css-tree@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/css-tree/-/css-tree-2.3.1.tgz#10264ce1e5442e8572fc82fbe490644ff54b5c20"
@@ -6976,6 +6979,7 @@ object-inspect@^1.12.3, object-inspect@^1.9.0:
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.12.3.tgz#ba62dffd67ee256c8c086dfae69e016cd1f198b9"
   integrity sha512-geUvdk7c+eizMNUDkRpW1wJwgfOiOeHbxBR/hLXK1aT6zmVSO0jsQcs7fj6MGw89jC/cjGfLcNOrtMYtGqm81g==
 
+object-is@^1.0.1, object-is@^1.1.5:
 object-is@^1.0.1, object-is@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/object-is/-/object-is-1.1.5.tgz#b9deeaa5fc7f1846a0faecdceec138e5778f53ac"
