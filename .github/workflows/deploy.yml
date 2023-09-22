@@ -25,6 +25,17 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-project:latest
 
+      - name: Prepare Beanstalk Deployment
+        run: |
+          echo '{
+            "AWSEBDockerrunVersion": "1",
+            "Image": {
+              "Name": "${{ secrets.DOCKERHUB_USERNAME }}/node-project:latest",
+              "Update": "true"
+            }
+          }' > Dockerrun.aws.json
+          zip deploy.zip Dockerrun.aws.json
+
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v20
         with:
@@ -34,3 +45,4 @@ jobs:
           environment_name: ${{ secrets.AWS_ENVIRONMENT_NAME }}
           region: ap-northeast-2
           version_label: ${{ github.sha }}
+          deployment_package: Dockerrun.aws.json
