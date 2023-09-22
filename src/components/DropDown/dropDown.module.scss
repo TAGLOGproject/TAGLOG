@@ -1,19 +1,16 @@
-.dropDownContainer {
+.DropDownContainer {
   position: relative;
 }
-
-.dropDownWrapper {
+.DropDownWrapper {
   position: absolute;
-  right: 0;
+  border: 2px solid var(--color-gray-a);
+  right: 0px;
   width: 144px;
   height: 144px;
   padding: 12px 16px;
-  border: 2px solid var(--color-gray-a);
 }
-
-.dropDownMenu {
+.DropDownMenu {
   cursor: pointer;
-
   &:hover {
     font-weight: bolder;
     color: var(--color-cy-5);
