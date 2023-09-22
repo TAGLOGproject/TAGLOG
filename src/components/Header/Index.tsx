@@ -1,6 +1,6 @@
 'use client';
 
-import DropDown from '../DropDown/Index';
+import DropDown from '../DropDown';
 import styles from './Header.module.scss';
 
 function Header() {
