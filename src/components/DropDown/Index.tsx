@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import styles from './dropDown.module.scss';
+import styles from './dropdown.module.scss';
 
 function DropDown() {
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
@@ -40,10 +40,10 @@ function DropDown() {
         onClick={onOpenDropDown}
       />
       {isDropDownOpen && (
-        <ul className={styles.dropDownWrapper}>
-          <li className={styles.dropDownMenu}>settings</li>
-          <li className={styles.dropDownMenu}>내가 작성한 글</li>
-          <li className={styles.dropDownMenu}>로그아웃</li>
+        <ul className={styles.dropdownWrapper}>
+          <li className={styles.dropdownMenu}>settings</li>
+          <li className={styles.dropdownMenu}>내가 작성한 글</li>
+          <li className={styles.dropdownMenu}>로그아웃</li>
         </ul>
       )}
     </div>
