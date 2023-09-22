@@ -10,6 +10,7 @@ TAG로 관리하는 블로그
 
 ```
 taglog
+├─ public
 ├─ src
 └─ 추가 예정
 

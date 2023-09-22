@@ -1,0 +1,137 @@
+.markdownWrapper {
+  h1 {
+    padding: 0;
+    margin: 32px 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    border: none;
+  }
+
+  h2 {
+    padding: 0;
+    margin: 32px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    border: none;
+  }
+
+  h3 {
+    padding: 0;
+    margin: 32px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    border: none;
+  }
+
+  h4 {
+    padding: 0;
+    margin: 32px 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.2;
+    border: none;
+  }
+
+  h5 {
+    padding: 0;
+    margin: 32px 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    border: none;
+  }
+
+  h6 {
+    padding: 0;
+    margin: 32px 0;
+    font-size: 0.83rem;
+    font-weight: 700;
+    line-height: 1.2;
+    border: none;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+
+  a {
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.2;
+    color: var(--color-blue);
+    text-decoration: none;
+  }
+
+  code {
+    padding: 0 4px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-orange);
+    background: var(--bg-element2);
+    border-radius: 4px;
+  }
+
+  blockquote {
+    padding: 1rem 1rem 1rem 2rem;
+    margin: 2rem 0;
+    background: var(--bg-element2);
+    border-left: 8px solid var(--color-orange);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  pre {
+    display: block;
+    padding: 20px;
+    overflow-x: auto;
+    line-height: 28px;
+    word-break: break-word;
+    background-color: var(--color-bg);
+    border-radius: 0;
+
+    code {
+      padding: 0 4px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: black;
+      border-radius: 4px;
+    }
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  ul {
+    display: block;
+    padding-inline-start: 40px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    list-style-type: disc;
+
+    li {
+      display: list-item;
+      line-height: 2;
+      text-align: -webkit-match-parent;
+      list-style: disc;
+    }
+
+    ol {
+      display: block;
+      padding-inline-start: 40px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+      list-style-type: decimal;
+    }
+  }
+}

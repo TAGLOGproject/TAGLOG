@@ -1,9 +1,8 @@
+import mongoose from 'mongoose';
+import { NextRequest, NextResponse } from 'next/server';
+
 import connectDb from '@/app/lib/dbConnect';
 import Contact from '@/models/Contact';
-
-import mongoose from 'mongoose';
-
-import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const { name, email, message } = await req.json();
@@ -16,13 +15,17 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
-      const errorList = Object.values(error.errors).map((err: any) => err.message);
+      const errorList = Object.values(error.errors).map((err) => err.message);
       return NextResponse.json({ msg: errorList, success: false });
     }
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
+  // TODO: refresh token으로 accessToken 재발급
+  // const cookieStore = cookies();
+  // const refreshToken = cookieStore.get('refreshToken') as RequestCookie;
+
   try {
     await connectDb();
     const data = await Contact.find();
@@ -31,9 +34,10 @@ export async function GET(req: NextRequest) {
       success: true,
     });
   } catch (error) {
-    if (error instanceof mongoose.Error.ValidationError) {
-      const errorList = Object.values(error.errors).map((err: any) => err.message);
-      return NextResponse.json({ msg: errorList, success: false });
-    }
+    // if (error instanceof mongoose.Error.ValidationError) {
+    //   const errorList = Object.values(error.errors).map((err) => err.message);
+    //   return NextResponse.error().json();
+    // }
+    return NextResponse.error().json();
   }
 }

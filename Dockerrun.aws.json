@@ -1,0 +1,18 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "taglog",
+    "Update": "true"
+  },
+  "Environment": {
+    "DATABASE_HOST": "$DATABASE_HOST",
+    "DATABASE_USER": "$DATABASE_USER",
+    "DATABASE_PASSWORD": "$DATABASE_PASSWORD"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 3000,
+      "HostPort": 5000
+    }
+  ]
+}

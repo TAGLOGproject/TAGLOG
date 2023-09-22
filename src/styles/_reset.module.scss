@@ -29,7 +29,7 @@ code,
 del,
 dfn,
 em,
-img,
+// img,
 ins,
 kbd,
 q,
@@ -136,4 +136,26 @@ q::after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+html {
+  --color-primary: #f8f9fa;
+  --color-secondary: #e9ecef;
+  --color-highlight: #121212;
+  --color-overlay: #2e2e2e;
+  --color-text: #121212;
+}
+
+html[data-theme='dark'] {
+  --color-primary: #1e1e1e;
+  --color-secondary: #121212;
+  --color-highlight: #e9ecef;
+  --color-overlay: #dee2e6;
+  --color-text: #dee2e6;
 }

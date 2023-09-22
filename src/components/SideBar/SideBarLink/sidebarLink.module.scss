@@ -1,0 +1,16 @@
+.linkWrap {
+  a {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}

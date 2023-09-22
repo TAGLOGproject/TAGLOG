@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import styles from './DropDown.module.scss';
-import Hamburger from '../../assets/svg/hamburger.svg';
+import Image from 'next/image';
+import styles from './dropdown.module.scss';
 
 function DropDown() {
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
@@ -31,13 +31,19 @@ function DropDown() {
   }, []);
 
   return (
-    <div className={styles.DropDownContainer} ref={dropDownRef}>
-      <Hamburger onClick={onOpenDropDown} />
+    <div className={styles.dropDownContainer} ref={dropDownRef}>
+      <Image
+        src="/svg/hamberger.svg"
+        alt="hamberger"
+        width={16}
+        height={16}
+        onClick={onOpenDropDown}
+      />
       {isDropDownOpen && (
-        <ul className={styles.DropDownWrapper}>
-          <li className={styles.DropDownMenu}>settings</li>
-          <li className={styles.DropDownMenu}>내가 작성한 글</li>
-          <li className={styles.DropDownMenu}>로그아웃</li>
+        <ul className={styles.dropdownWrapper}>
+          <li className={styles.dropdownMenu}>settings</li>
+          <li className={styles.dropdownMenu}>내가 작성한 글</li>
+          <li className={styles.dropdownMenu}>로그아웃</li>
         </ul>
       )}
     </div>
