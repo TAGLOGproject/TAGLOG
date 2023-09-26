@@ -23,14 +23,14 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-project:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/taglog:latest
 
       - name: Prepare Beanstalk Deployment
         run: |
           echo '{
             "AWSEBDockerrunVersion": "1",
             "Image": {
-              "Name": "${{ secrets.DOCKERHUB_USERNAME }}/node-project:latest",
+              "Name": "${{ secrets.DOCKERHUB_USERNAME }}/taglog:latest",
               "Update": "true"
             }
           }' > Dockerrun.aws.json
