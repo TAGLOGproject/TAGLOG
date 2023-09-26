@@ -33,7 +33,13 @@ jobs:
               "Name": "${{ secrets.DOCKERHUB_USERNAME }}/taglog:latest",
               "Update": "true"
             }
-          }' > Dockerrun.aws.json
+            "Ports": [
+            {
+              "ContainerPort": 3000,
+              "HostPort": 80
+            }
+          ]
+              }' > Dockerrun.aws.json
           zip deploy.zip Dockerrun.aws.json
 
       - name: Beanstalk Deploy
