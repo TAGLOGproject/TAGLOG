@@ -32,7 +32,7 @@ jobs:
             "Image": {
               "Name": "${{ secrets.DOCKERHUB_USERNAME }}/taglog:latest",
               "Update": "true"
-            }
+            },
             "Ports": [
             {
               "ContainerPort": 3000,
