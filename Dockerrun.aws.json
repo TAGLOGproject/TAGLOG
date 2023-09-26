@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "taglog",
+    "Name": "leejoonhyuk/taglog",
     "Update": "true"
   },
   "Environment": {
