@@ -1,6 +1,6 @@
 'use client';
 
-import axiosInstance from '@/utils/axios';
+import { instance } from '@/service/axios';
 import React from 'react';
 
 export default function Test() {
@@ -11,7 +11,7 @@ export default function Test() {
     console.log('onClickNextPublic', process.env.TEST);
   };
   const getApiTest = async () => {
-    const res = await axiosInstance('/contact');
+    const res = await instance('/contact');
     console.log(res);
   };
   return (
