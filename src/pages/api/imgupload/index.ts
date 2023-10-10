@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   const post = await s3.createPresignedPost({
-    Bucket: process.env.BUCKET_NAME,
+    Bucket: process.env.S3_BUCKET_NAME,
     Fields: {
       key: req.query.file,
       'Content-Type': req.query.fileType,
@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ['content-length-range', 0, 1048576], // up to 1 MB
     ],
   });
-  const imgUrl = `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${req.query.file}`;
+  const imgUrl = `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/${req.query.file}`;
 
   res.status(200).json({
     ...post,
