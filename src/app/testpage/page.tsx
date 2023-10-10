@@ -7,8 +7,8 @@ export default function Test() {
   const onClickTestPublic = () => {
     console.log('onClickNextPublic', process.env.NEXT_PUBLIC_TEST);
   };
-  const onClickTest = () => {
-    console.log('onClickNextPublic', process.env.TEST);
+  const onClickRedirect = () => {
+    console.log('onClickRedirect', process.env.NEXT_PUBLIC_REDIRECT_URI);
   };
   const getApiTest = async () => {
     const res = await instance('/contact');
@@ -19,7 +19,7 @@ export default function Test() {
       <button type="button" onClick={onClickTestPublic}>
         test-nextPublic
       </button>
-      <button type="button" onClick={onClickTest}>
+      <button type="button" onClick={onClickRedirect}>
         test
       </button>
       <button type="button" onClick={getApiTest}>
