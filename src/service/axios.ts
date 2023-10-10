@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { BASE_URL } from '@/constants';
 import { getAccessToken } from '@/utils/localstorage';
 
 const defaultConfig = {
-  baseURL: BASE_URL,
+  baseURL: `/api`,
   headers: {
     'Content-Type': 'application/json',
   },
