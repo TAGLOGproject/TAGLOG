@@ -11,6 +11,12 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
+      - name: Create .env file
+        run: |
+          echo "NEXT_PUBLIC_KAKAO_CLIENT_ID=${{ secrets.NEXT_PUBLIC_KAKAO_CLIENT_ID }}" > .env
+          echo "NEXT_PUBLIC_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_REDIRECT_URI }}" > .env
+          echo "NEXT_PUBLIC_TEST=${{ secrets.NEXT_PUBLIC_TEST }}" > .env
+
       - name: Login to Docker hub
         uses: docker/login-action@v1
         with:
