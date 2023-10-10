@@ -1,6 +1,6 @@
 export const { JWT_SECRET } = process.env;
 
-export const REDIRECT_URI = 'http://localhost:3000/oauth';
+export const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
 export const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
 
