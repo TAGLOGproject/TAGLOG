@@ -1,27 +1,22 @@
+import { IPost } from '@/types/api/post';
 import mongoose from 'mongoose';
 
-export interface IPost {
-  id: string;
-  title: string;
-  body: string;
-  thumbnail: string;
-  created_at: string;
-  edited_at: string;
-  is_temp: boolean;
-  comments: object;
-  comments_count: number;
-  user: object;
-  tags: Array<string>;
-  like_count: number;
-  tag_recommend_post: Array<any>;
-}
 const PostSchema = new mongoose.Schema({
+  post_id: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   id: {
     type: String,
     required: true,
     trim: true,
   },
   title: {
+    type: String,
+    required: true,
+  },
+  subtitle: {
     type: String,
     required: true,
   },
@@ -89,9 +84,6 @@ export const DATA: IPost = {
     },
   ],
   comments_count: 0,
-  user: {
-    // userData
-  },
   tags: ['js', 'ts', 'react'],
   like_count: 0,
   tag_recommend_post: [
@@ -104,4 +96,6 @@ export const DATA: IPost = {
       comments_count: 0,
     },
   ],
+  post_id: '',
+  subtitle: '',
 };
