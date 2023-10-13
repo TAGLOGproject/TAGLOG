@@ -79,7 +79,15 @@ export const DATA: IPost = {
   created_at: '2023-06-21T05:52:25.903Z',
   edited_at: '2023-07-01T13:45:03.263Z',
   is_temp: false,
-  comments: {},
+  comments: [
+    {
+      commentId: '20230101_1',
+      userid: 1,
+      nickname: '닉네임',
+      contents: '댓글 내용',
+      comments: [],
+    },
+  ],
   comments_count: 0,
   user: {
     // userData
