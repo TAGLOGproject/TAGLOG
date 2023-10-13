@@ -5,6 +5,10 @@ import Card from '@/components/Card';
 import { instance } from '@/service/axios';
 
 export default function Home() {
+  const getList = async () => {
+    const data = await instance.get('post-list');
+    console.log(data);
+  };
   return (
     <div>
       <Card />
@@ -16,6 +20,9 @@ export default function Home() {
         }}
       >
         api
+      </button>
+      <button type="button" onClick={getList}>
+        getList
       </button>
     </div>
   );
