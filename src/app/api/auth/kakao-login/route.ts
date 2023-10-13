@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
     // refreshToken은 httpOnly 쿠키로 전달 (accessToken은 body로 전달)
     // TODO: refreshToken이 만료된경우 카카오 로그인 처리가 되어야함
-    const response = NextResponse.json({ success: 'true', accessToken });
+    const response = NextResponse.json({ success: 'true', accessToken }, { status: 200 });
     response.cookies.set({
       name: 'refreshToken',
       value: refreshToken,
@@ -28,7 +28,10 @@ export async function POST(req: NextRequest) {
 
     return response;
   } catch (error) {
-    const response = NextResponse.json({ success: 'false', message: 'login fail' });
+    const response = NextResponse.json(
+      { success: 'false', message: 'login fail' },
+      { status: 400 }
+    );
     return response;
   }
 }
