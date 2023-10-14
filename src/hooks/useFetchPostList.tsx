@@ -3,18 +3,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import { getCardsAPI } from '@/service/card';
+import { getPostListAPI } from '@/service/post';
 
-const useFetchCards = () => {
-  const [cardsData, setCardsData] = useState([]);
+const useFetchPostList = () => {
+  const [postListData, setPostListData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getCards = useCallback(async () => {
+  const getPostList = useCallback(async () => {
     try {
       setIsLoading(true);
 
-      const data = await getCardsAPI();
-      setCardsData(data);
+      const data = await getPostListAPI();
+      setPostListData(data);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -23,9 +23,10 @@ const useFetchCards = () => {
   }, []);
 
   useEffect(() => {
-    getCards();
-  }, [getCards]);
-  return { cardsData, isLoading };
+    getPostList();
+  }, [getPostList]);
+
+  return { postListData, isLoading };
 };
 
-export default useFetchCards;
+export default useFetchPostList;

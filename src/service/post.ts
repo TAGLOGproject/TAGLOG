@@ -1,6 +1,6 @@
 import { instance } from './axios';
 
-export const getCardsAPI = async () => {
+export const getPostListAPI = async () => {
   const { data } = await instance.get('post-list');
   return data;
 };

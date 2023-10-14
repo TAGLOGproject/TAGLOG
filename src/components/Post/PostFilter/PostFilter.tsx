@@ -3,12 +3,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import classNames from 'classnames';
-import { ICard } from '@/types/card';
-import styles from './cardFilter.module.scss';
+import styles from './postFilter.module.scss';
 
 const FILTER_OPTIONS = ['All', 'React', 'TypeScript', 'Next'];
 
-function CardFilter({ id }: ICard) {
+function PostFilter() {
   const [isOpen, setIsOpen] = useState(false);
   const [clickedList, setClickedList] = useState('All');
 
@@ -64,4 +63,4 @@ function CardFilter({ id }: ICard) {
   );
 }
 
-export default CardFilter;
+export default PostFilter;
