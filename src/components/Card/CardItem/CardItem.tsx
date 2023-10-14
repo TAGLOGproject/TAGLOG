@@ -1,10 +1,13 @@
+import Link from 'next/link';
 import Typography from '@/components/Typography';
+import { ICard } from '@/types/card';
 import styles from './cardItem.module.scss';
 
-function CardItem() {
+function CardItem({ id }: ICard) {
   return (
     <div className={styles.container}>
-      <Typography variant="body3" className={styles.careDate}>
+      <Link href={`/card-details/${id}`} />
+      <Typography variant="body3" className={styles.cardDate}>
         Oct 11. 2023
       </Typography>
       <Typography variant="title1" className={styles.cardTitle}>
