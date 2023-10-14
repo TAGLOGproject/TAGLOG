@@ -1,5 +1,5 @@
 export interface IPostListData {
-  id: string;
+  _id: string;
   post_id: string;
   thumbnail: string;
   title: string;
