@@ -6,7 +6,7 @@ import PostList from '@/models/PostList';
 
 const MOCK_POST_LIST: IPostListData[] = [
   {
-    id: '23',
+    _id: '23',
     thumbnail: '',
     post_id: '2023101034242245', // timestamp + random
     title: '개발이란',
@@ -18,7 +18,7 @@ const MOCK_POST_LIST: IPostListData[] = [
     comments_count: 0,
   },
   {
-    id: '23',
+    _id: '23',
     thumbnail: '',
     post_id: '2023101034242245', // timestamp + random
     title: '개발이란',
