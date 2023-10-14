@@ -1,7 +1,7 @@
 import Provider from '@/components/Provider';
 import '../styles/global.scss';
 import Layout from '@/components/Layout';
-import ToastProvider from '@/components/ToastProvider/ToastProvider';
+import ToastProvider from '@/components/ToastProvider';
 
 export const metadata = {
   title: 'TAGLOG',
