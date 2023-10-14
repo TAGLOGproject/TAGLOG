@@ -4,9 +4,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { getPostListAPI } from '@/service/post';
+import { IPostListData } from '@/types/api/post';
 
 const useFetchPostList = () => {
-  const [postListData, setPostListData] = useState([]);
+  const [postListData, setPostListData] = useState<IPostListData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const getPostList = useCallback(async () => {
