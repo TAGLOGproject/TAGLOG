@@ -29,10 +29,13 @@ export async function GET() {
   try {
     await connectDb();
     const data = await Contact.find();
-    return NextResponse.json({
-      data,
-      success: true,
-    });
+    return NextResponse.json(
+      {
+        data,
+        success: true,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     // if (error instanceof mongoose.Error.ValidationError) {
     //   const errorList = Object.values(error.errors).map((err) => err.message);

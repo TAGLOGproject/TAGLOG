@@ -5,6 +5,7 @@ import React, { useCallback, useEffect } from 'react';
 
 import { postKakaoAuthApi } from '@/service/sign';
 import { getAccessToken, setAccessToken } from '@/utils/localstorage';
+import LoadingUI from '@/components/LoadingUI';
 
 export default function OAuth() {
   const searchParams = useSearchParams();
@@ -32,5 +33,9 @@ export default function OAuth() {
     postKakaoAuth();
   }, [postKakaoAuth]);
 
-  return <div>{authCode}</div>;
+  return (
+    <div>
+      <LoadingUI type="center" />
+    </div>
+  );
 }
