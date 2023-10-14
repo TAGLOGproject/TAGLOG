@@ -1,5 +1,8 @@
+'use client';
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 import { getCardsAPI } from '@/service/card';
 
 const useFetchCards = () => {
@@ -15,7 +18,7 @@ const useFetchCards = () => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      toast.error(error.message);
+      toast.error((error as AxiosError).message);
     }
   }, []);
 
