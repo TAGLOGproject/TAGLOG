@@ -8,12 +8,12 @@ import PostList from './PostList/PostList';
 
 function Post() {
   const { postListData, isLoading } = useFetchPostList();
-  const postList = postListData;
+  console.log('postListData', postListData);
 
   return (
     <>
       {isLoading ? null : <PostFilter />}
-      {isLoading ? <LoadingUI type="center" /> : <PostList postList={postList} />}
+      {isLoading ? <LoadingUI type="center" /> : <PostList postList={postListData} />}
     </>
   );
 }
