@@ -1,0 +1,28 @@
+.container {
+  padding: 12px;
+  background-color: aliceblue;
+  border-radius: 12px;
+
+  .careDate {
+    text-align: right;
+  }
+
+  .cardTitle {
+    margin-bottom: 1rem;
+  }
+
+  .cardContent {
+    margin-bottom: 1rem;
+  }
+
+  .tagContainer {
+    display: flex;
+    gap: 4px;
+
+    .tag {
+      padding: 4px;
+      border: 1px solid blue;
+      border-radius: 16px;
+    }
+  }
+}
