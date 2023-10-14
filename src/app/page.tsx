@@ -1,5 +1,8 @@
-import Card from '@/components/Card';
+import React from 'react';
+import Post from '@/components/Post';
 
-export default function Home() {
-  return <Card />;
-}
+const page = () => {
+  return <Post />;
+};
+
+export default page;
