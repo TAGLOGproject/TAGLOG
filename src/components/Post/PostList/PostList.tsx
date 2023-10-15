@@ -1,12 +1,14 @@
 import React from 'react';
-import { IPostListData } from '@/types/api/post';
+import useFilteredPostsStore from '@/store/zustand/useFilteredPostsStore';
 import styles from './postList.module.scss';
 import Post from '../Post/Post';
 
-function PostList({ postList }: { postList: IPostListData[] }) {
+function PostList() {
+  const { filteredPostList } = useFilteredPostsStore();
+
   return (
     <div className={styles.container}>
-      {postList.map((item) => (
+      {filteredPostList.map((item) => (
         <Post key={item.post_id} postData={item} />
       ))}
     </div>
