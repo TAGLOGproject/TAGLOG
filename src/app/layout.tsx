@@ -1,6 +1,7 @@
 import Provider from '@/components/Provider';
 import '../styles/global.scss';
 import Layout from '@/components/Layout';
+import ToastProvider from '@/components/ToastProvider';
 
 export const metadata = {
   title: 'TAGLOG',
@@ -12,6 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Provider>
+          <ToastProvider />
           <Layout>{children}</Layout>
         </Provider>
       </body>

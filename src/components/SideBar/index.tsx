@@ -12,6 +12,7 @@ import SideBarLink from './SideBarLink';
 interface IUerData {
   name: string;
   subtitle: string;
+  contents: string;
   avatar: string;
   sns: {
     type: 'github' | 'linkedin' | 'mail';
@@ -21,7 +22,7 @@ interface IUerData {
 const MOCKDATA: IUerData = {
   name: 'joonhyuk',
   subtitle: 'Frontend Developer',
-
+  contents: '눈에 띄지 않는 것의 가치',
   avatar: '/src/assets/image/avatar.jpeg',
   sns: [
     {
@@ -55,7 +56,7 @@ export default function SideBar() {
       <div className={styles.avatarAnimationWrapper}>
         <div className={styles.avatarWrapper}>
           <Image
-            src="/avatar.jpeg"
+            src="/avatar.jpg"
             alt="avatar"
             width="200"
             height="200"

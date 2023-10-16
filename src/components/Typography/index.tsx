@@ -36,7 +36,7 @@ function Typography({ variant = 'span', className, children }: ITypographyProps)
       case 'h4':
         return ['h4', styles.heading4];
       case 'title1':
-        return ['p', styles.title1];
+        return ['h2', styles.title1];
       case 'title2':
         return ['p', styles.title2];
       case 'title3':
