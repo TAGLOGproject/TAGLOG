@@ -1,5 +1,5 @@
-import { IPost } from '@/types/api/post';
 import mongoose from 'mongoose';
+import { IPost } from '@/types/api/post';
 
 const PostSchema = new mongoose.Schema({
   post_id: {
