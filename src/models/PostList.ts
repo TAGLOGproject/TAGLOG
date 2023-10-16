@@ -5,6 +5,7 @@ const PostListSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    unique: true,
   },
   thumbnail: {
     type: String,
@@ -23,8 +24,8 @@ const PostListSchema = new mongoose.Schema({
     required: true,
   },
   created_at: {
-    type: String,
-    required: true,
+    type: Date,
+    default: Date.now,
   },
   edited_at: {
     type: String,

@@ -16,13 +16,17 @@ export interface IPostListData {
   edited_at: string;
 }
 
-export interface IPost {
-  id: string;
-  post_id: string;
+export interface IReqPost {
   title: string;
   subtitle: string;
   body: string;
   thumbnail: string;
+  tags: Array<string>;
+}
+
+export interface IPost extends IReqPost {
+  _id: string;
+  post_id: string;
   created_at: string;
   edited_at: string;
   is_temp: boolean;
@@ -33,7 +37,6 @@ export interface IPost {
     nickName: string;
     thumbnail: string;
   };
-  tags: Array<string>;
   like_count: number;
   tag_recommend_post: Array<any>;
 }

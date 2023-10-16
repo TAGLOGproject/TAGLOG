@@ -7,11 +7,6 @@ const PostSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  id: {
-    type: String,
-    required: true,
-    trim: true,
-  },
   title: {
     type: String,
     required: true,
@@ -28,13 +23,15 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  createdAt: {
-    type: String,
+  created_at: {
+    type: Date,
+    default: Date.now,
     required: true,
   },
-  editedAt: {
-    type: String,
-    required: false,
+  edited_at: {
+    type: Date,
+    default: Date.now,
+    required: true,
   },
   is_temp: {
     type: Boolean,
@@ -64,10 +61,10 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.User || mongoose.model('User', PostSchema);
+export default mongoose.models.post || mongoose.model('post', PostSchema);
 
 export const DATA: IPost = {
-  id: 'a6ad4723-2e39-46b8-86b3-5eca43abcf4d',
+  _id: 'a6ad4723-2e39-46b8-86b3-5eca43abcf4d',
   title: 'title',
   body: '> 예시 MOCKING DATA 입니다.\n> \n\n>',
   thumbnail: 'image url',
