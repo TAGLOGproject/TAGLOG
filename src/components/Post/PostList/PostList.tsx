@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import useFilteredPostsStore from '@/store/zustand/useFilteredPostsStore';
 import Pagination from '@/components/Pagination';
-import useFetchPostList from '@/hooks/useFetchPostList';
 import styles from './postList.module.scss';
 import Post from '../Post/Post';
 
 function PostList() {
+  const { filteredPostList } = useFilteredPostsStore();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postsPerPage] = useState<number>(6);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-  const { filteredPostList } = useFilteredPostsStore();
-
   const currentPagePosts = filteredPostList.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
