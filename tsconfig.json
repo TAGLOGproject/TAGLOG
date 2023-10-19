@@ -23,6 +23,7 @@
       "@/*": ["./src/*"]
     }
   },
+  "types": ["@types/markdown-it"],
   "include": [
     "next.config.js",
     "next-env.d.ts",

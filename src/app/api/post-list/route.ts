@@ -36,7 +36,7 @@ export async function GET() {
     await connectDb();
 
     const data = await PostList.find();
-    console.log(data);
+
     return NextResponse.json(
       {
         data,

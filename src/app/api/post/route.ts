@@ -1,5 +1,5 @@
-import { IPost } from '@/types/api/post';
 import { NextRequest, NextResponse } from 'next/server';
+import { IPost } from '@/types/api/post';
 
 import connectDb from '@/app/lib/dbConnect';
 import Post from '@/models/Post';
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       {
-        data,
+        // data,
         success: true,
       },
       { status: 200 }

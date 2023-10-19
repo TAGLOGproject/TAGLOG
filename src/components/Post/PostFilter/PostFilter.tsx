@@ -3,16 +3,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import classNames from 'classnames';
-import { ICard } from '@/types/card';
-import styles from './cardFilter.module.scss';
+import useFilteredPostsStore from '@/store/zustand/useFilteredPostsStore';
+import { TagType } from '@/types/tag';
+import styles from './postFilter.module.scss';
 
-const FILTER_OPTIONS = ['All', 'React', 'TypeScript', 'Next'];
+const FILTERED_TAGS: TagType[] = ['All', 'Javascript', 'React', 'Typescript', 'Next'];
 
-function CardFilter({ id }: ICard) {
+function PostFilter() {
   const [isOpen, setIsOpen] = useState(false);
-  const [clickedList, setClickedList] = useState('All');
 
   const ref = useRef<HTMLDivElement>(null);
+
+  const { selectedTag, setTag } = useFilteredPostsStore();
 
   const handleMouseEnter = () => {
     setIsOpen(true);
@@ -22,8 +24,8 @@ function CardFilter({ id }: ICard) {
     setIsOpen(false);
   };
 
-  const handleListClick = (item: string) => {
-    setClickedList(item);
+  const handleFilterClick = (tag: TagType) => {
+    setTag(tag);
   };
 
   useEffect(() => {
@@ -44,15 +46,15 @@ function CardFilter({ id }: ICard) {
   return (
     <div ref={ref} className={styles.container}>
       <button className={styles.button} type="button">
-        {clickedList}
+        {selectedTag}
         <AiFillCaretDown size={10} />
       </button>
       <div className={classNames(styles.listWrapper)}>
         {isOpen && (
           <ul className={styles.ul}>
-            {FILTER_OPTIONS.map((item) => (
+            {FILTERED_TAGS.map((item) => (
               <li key={item} className={styles.li}>
-                <button type="button" onClick={() => handleListClick(item)}>
+                <button type="button" onClick={() => handleFilterClick(item)}>
                   {item}
                 </button>
               </li>
@@ -64,4 +66,4 @@ function CardFilter({ id }: ICard) {
   );
 }
 
-export default CardFilter;
+export default PostFilter;
