@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import connectDb from '@/app/lib/dbConnect';
+import connectDb from '@/lib/dbConnect';
 import { IPostListData } from '@/types/api/post';
 import PostList from '@/models/PostList';
 

@@ -2,17 +2,27 @@
 
 'use client';
 
+import MarkdownIt from 'markdown-it';
 import { useState } from 'react';
 import MdEditor from 'react-markdown-editor-lite';
-import 'react-markdown-editor-lite/lib/index.css';
 
-import MarkdownIt from 'markdown-it';
+import 'react-markdown-editor-lite/lib/index.css';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { createPostAPI } from '@/service/post';
+
+import styles from './editor.module.scss';
 
 // Initialize a markdown parser
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 export default function Editor() {
+  const [title, setTitle] = useState<string>('');
+  const [tagText, setTagText] = useState<string>('');
+  const [tags, setTags] = useState<string[]>([]);
   const [mdEditorContents, setMdEditorContents] = useState<string>('');
+
+  const router = useRouter();
 
   const handleEditorChange = ({ text }: { text: string }) => {
     setMdEditorContents(text);
@@ -46,8 +56,80 @@ export default function Editor() {
     throw new Error('Upload failed.');
   };
 
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+  const onAddTag = () => {
+    const trimedText = tagText.trim();
+    if (!trimedText) {
+      toast.error('태그를 입력해 주세요');
+      return;
+    }
+    if (tags.includes(trimedText)) {
+      toast.error('중복된 태그입니다');
+      return;
+    }
+    setTags([...tags, trimedText]);
+    setTagText('');
+  };
+
+  const onDeleteTag = (tag: string) => {
+    const filterdTag = tags.filter((t) => t !== tag);
+    setTags(filterdTag);
+  };
+
+  const createPost = async () => {
+    try {
+      await createPostAPI({ title, tags, body: mdEditorContents });
+      toast.success('포스트가 생성되었습니다');
+      router.push('/');
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
+
   return (
-    <div>
+    <div className={styles.container}>
+      <div className={styles.titleContainer}>
+        <input
+          className={styles.titleInput}
+          value={title}
+          type="text"
+          placeholder="Title"
+          onChange={onChangeTitle}
+        />
+      </div>
+      <div>
+        <div className={styles.tagInputContainer}>
+          <input
+            className={styles.tagInput}
+            value={tagText}
+            onChange={(e) => {
+              setTagText(e.target.value);
+            }}
+            type="text"
+            placeholder="태그를 추가해 주세요"
+          />
+          <button className={styles.addButton} type="button" onClick={onAddTag}>
+            ADD
+          </button>
+        </div>
+      </div>
+      <div className={styles.tagContainer}>
+        {tags.map((tag) => (
+          <div className={styles.tag} key={tag}>
+            <span>{tag}</span>
+            <button
+              onClick={() => {
+                onDeleteTag(tag);
+              }}
+              type="button"
+            >
+              X
+            </button>
+          </div>
+        ))}
+      </div>
       <MdEditor
         value={mdEditorContents}
         style={{ height: '700px' }}
@@ -55,6 +137,9 @@ export default function Editor() {
         renderHTML={(text) => mdParser.render(text)}
         onImageUpload={onCustomImageUpload}
       />
+      <button className={styles.submitButton} type="button" onClick={createPost}>
+        Submit
+      </button>
     </div>
   );
 }

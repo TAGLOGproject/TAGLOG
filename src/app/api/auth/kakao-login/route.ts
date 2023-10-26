@@ -2,7 +2,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 
-import connectDb from '@/app/lib/dbConnect';
+import connectDb from '@/lib/dbConnect';
 import { getTokenFromKakao, getUserFromKakao, saveOrUpdateUser } from '@/utils/backend/kakao';
 
 export async function POST(req: NextRequest) {
