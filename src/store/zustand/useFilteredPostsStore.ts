@@ -1,12 +1,12 @@
 import { create } from 'zustand';
-import { IPostListData } from '@/types/api/post';
+import { IPost } from '@/types/api/post';
 import { TagType } from '@/types/tag';
 
 export type filteredPostsState = {
-  postList: IPostListData[];
+  postList: IPost[];
   selectedTag: TagType;
-  filteredPostList: IPostListData[];
-  setPostList: (postList: IPostListData[]) => void;
+  filteredPostList: IPost[];
+  setPostList: (postList: IPost[]) => void;
 
   setTag: (tag: TagType) => void;
 };
@@ -15,7 +15,7 @@ const useFilteredPostsStore = create<filteredPostsState>((set, get) => ({
   postList: [],
   selectedTag: 'All',
   filteredPostList: [],
-  setPostList: (data: IPostListData[]) => {
+  setPostList: (data: IPost[]) => {
     set({ postList: data, filteredPostList: data });
   },
   setTag: (tag) => {

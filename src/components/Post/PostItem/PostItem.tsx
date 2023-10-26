@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Typography from '@/components/Typography';
-import { IPostListData } from '@/types/api/post';
+import { IPost } from '@/types/api/post';
 import { formatTime } from '@/utils/dayjs';
 import styles from './postItem.module.scss';
 
-function PostItem({ postData }: { postData: IPostListData }) {
+function PostItem({ postData }: { postData: IPost }) {
   const { post_id: postId, title, subtitle, tags, created_at: createdAt } = postData;
 
   return (
