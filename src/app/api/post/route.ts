@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function Delete(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
   const url = new URL(req.url);
   const postId = url.searchParams.get('postId');
 
