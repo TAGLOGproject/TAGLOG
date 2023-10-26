@@ -2,9 +2,9 @@ import Link from 'next/link';
 import Typography from '@/components/Typography';
 import { IPostListData } from '@/types/api/post';
 import { formatTime } from '@/utils/dayjs';
-import styles from './post.module.scss';
+import styles from './postItem.module.scss';
 
-function Post({ postData }: { postData: IPostListData }) {
+function PostItem({ postData }: { postData: IPostListData }) {
   const { post_id: postId, title, subtitle, tags, created_at: createdAt } = postData;
 
   return (
@@ -31,4 +31,4 @@ function Post({ postData }: { postData: IPostListData }) {
   );
 }
 
-export default Post;
+export default PostItem;

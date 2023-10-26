@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useFilteredPostsStore from '@/store/zustand/useFilteredPostsStore';
 import Pagination from '@/components/Pagination';
 import styles from './postList.module.scss';
-import Post from '../Post/Post';
+import PostItem from '../PostItem/PostItem';
 
 function PostList() {
   const { filteredPostList } = useFilteredPostsStore();
@@ -17,7 +17,7 @@ function PostList() {
     <>
       <div className={styles.container}>
         {currentPagePosts.map((item) => (
-          <Post key={item.post_id} postData={item} />
+          <PostItem key={item.post_id} postData={item} />
         ))}
       </div>
 

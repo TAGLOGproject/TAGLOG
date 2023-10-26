@@ -1,8 +1,8 @@
 import React from 'react';
-import Post from '@/components/Post';
+import PostItem from '@/components/Post';
 
 const page = () => {
-  return <Post />;
+  return <PostItem />;
 };
 
 export default page;
