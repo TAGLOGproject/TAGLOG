@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 24px;
+
+  .titleContainer {
+    display: flex;
+    flex-direction: column;
+
+    .titleInput {
+      padding: 0;
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      background-color: transparent;
+      border: none;
+      outline: none;
+
+      &::placeholder {
+        color: var(--color-overlay);
+      }
+    }
+  }
+
+  .tagInputContainer {
+    display: inline-flex;
+    align-items: center;
+    border-bottom: 1px solid var(--color-overlay);
+
+    .tagInput {
+      padding: 0;
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 500;
+      background-color: transparent;
+      border: none;
+      outline: none;
+
+      &::placeholder {
+        color: var(--color-overlay);
+      }
+    }
+
+    .addButton {
+      padding: 4px 8px;
+      color: var(--color-primary);
+      background-color: var(--color-overlay);
+    }
+  }
+
+  .tagContainer {
+    display: flex;
+    align-items: center;
+
+    .tag {
+      padding: 4px 8px;
+      margin-right: 4px;
+      color: var(--color-primary);
+      background-color: var(--color-overlay);
+    }
+  }
+
+  .submitButton {
+    padding: 4px 8px;
+    color: var(--color-primary);
+    background-color: var(--color-overlay);
+  }
+}

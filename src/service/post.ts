@@ -6,15 +6,27 @@ export const getPostListAPI = async (): Promise<IPostListData[]> => {
   return data.data;
 };
 
-export const createPostAPI = async () => {
-  const { data } = await instance.post('post', {
-    title: 'title',
+export const createPostAPI = async ({
+  title,
+  body,
+  thumbnail,
+  tags,
+}: {
+  title: string;
+  body: string;
+  thumbnail?: string;
+  tags: string[];
+}) => {
+  const reqBody = {
+    title,
     subtitle: 'subtitle',
-    body: 'body',
-    thumbnail: 'thumbnail',
+    body,
+    thumbnail: 'https://taglog-image-uploader.s3.ap-northeast-2.amazonaws.com/Test.png',
     user: { userId: 'test', userName: 'test' },
-    tags: ['typescript', 'nextjs', 'react'],
-  });
+    tags,
+  };
+
+  const { data } = await instance.post('post', reqBody);
   return data;
 };
 
