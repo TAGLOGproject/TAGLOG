@@ -1,0 +1,39 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  list-style: none;
+  border-top: 2px solid var(--color-secondary);
+
+  .hidden {
+    display: none;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1rem;
+    height: 1rem;
+    padding: 3px;
+    margin: 0 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid var(--color-secondary);
+  }
+
+  p {
+    margin-left: 1rem;
+
+    .page {
+      color: var(--color-blue);
+    }
+  }
+}
+
+.active {
+  color: var(--color-blue);
+  border: 1px solid var(--color-blue) !important;
+}
