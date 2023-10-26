@@ -1,12 +1,7 @@
-import { IPostListData } from '@/types/api/post';
+import { IPost } from '@/types/api/post';
 import { instance } from './axios';
 
-export const getPostListAPI = async (): Promise<IPostListData[]> => {
-  const { data } = await instance.get('post-list');
-  return data.data;
-};
-
-export const createPostAPI = async () => {
+export const createPostApi = async () => {
   const { data } = await instance.post('post', {
     title: 'title',
     subtitle: 'subtitle',
@@ -18,14 +13,9 @@ export const createPostAPI = async () => {
   return data;
 };
 
-export const getPostApi = async (postId: string) => {
+export const getPostApi = async (postId?: number): Promise<IPost[]> => {
   const { data } = await instance.get('post', { params: { postId } });
-  return data;
-};
-
-export const getPostListApi = async (postId?: number) => {
-  const { data } = await instance.get('post', { params: { postId } });
-  return data;
+  return data.data;
 };
 
 export const deletePostApi = async (postId: number) => {

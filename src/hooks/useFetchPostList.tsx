@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import { getPostListAPI } from '@/service/post';
+import { getPostApi } from '@/service/post';
 import useFilteredPostsStore from '@/store/zustand/useFilteredPostsStore';
 
 const useFetchPostList = () => {
@@ -12,7 +12,7 @@ const useFetchPostList = () => {
 
   const getPostList = useCallback(async () => {
     try {
-      const data = await getPostListAPI();
+      const data = await getPostApi();
       setPostList(data);
       setIsLoading(false);
     } catch (error) {
