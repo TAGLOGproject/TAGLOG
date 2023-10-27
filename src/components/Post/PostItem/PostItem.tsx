@@ -8,8 +8,7 @@ function PostItem({ postData }: { postData: IPost }) {
   const { post_id: postId, title, subtitle, tags, created_at: createdAt } = postData;
 
   return (
-    <div className={styles.container}>
-      <Link href={`/post-details/${postId}`} />
+    <Link className={styles.container} href={`/post-details/${postId}`}>
       <Typography variant="body3" className={styles.postDate}>
         {formatTime(createdAt)}
       </Typography>
@@ -27,7 +26,7 @@ function PostItem({ postData }: { postData: IPost }) {
             </div>
           ))}
       </div>
-    </div>
+    </Link>
   );
 }
 
