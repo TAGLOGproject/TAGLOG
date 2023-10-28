@@ -1,15 +1,14 @@
 import Link from 'next/link';
 import Typography from '@/components/Typography';
-import { IPostListData } from '@/types/api/post';
+import { IPost } from '@/types/api/post';
 import { formatTime } from '@/utils/dayjs';
-import styles from './post.module.scss';
+import styles from './postItem.module.scss';
 
-function Post({ postData }: { postData: IPostListData }) {
+function PostItem({ postData }: { postData: IPost }) {
   const { post_id: postId, title, subtitle, tags, created_at: createdAt } = postData;
 
   return (
-    <div className={styles.container}>
-      <Link href={`/post-details/${postId}`} />
+    <Link className={styles.container} href={`/post-details/${postId}`}>
       <Typography variant="body3" className={styles.postDate}>
         {formatTime(createdAt)}
       </Typography>
@@ -27,8 +26,8 @@ function Post({ postData }: { postData: IPostListData }) {
             </div>
           ))}
       </div>
-    </div>
+    </Link>
   );
 }
 
-export default Post;
+export default PostItem;
