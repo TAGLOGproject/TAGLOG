@@ -5,9 +5,9 @@ import PostDetails from './PostDetails';
 import LoadingUI from '../../../components/LoadingUI';
 
 function PostDetailsPage() {
-  const { isLoading } = useFetchPost();
+  const { isLoading, data } = useFetchPost();
 
-  return isLoading ? <LoadingUI type="component" /> : <PostDetails />;
+  return isLoading ? <LoadingUI type="component" /> : <PostDetails data={data} />;
 }
 
 export default PostDetailsPage;
