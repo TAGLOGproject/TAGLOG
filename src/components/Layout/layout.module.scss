@@ -1,6 +1,5 @@
 .contentsWrapper {
   display: flex;
-  // max-width: 1280px;
   height: 100vh;
   margin: 0 auto;
   background-color: var(--color-bg1);
@@ -17,10 +16,8 @@
     }
 
     .article {
-      box-sizing: border-box;
       width: 100%;
       max-width: var(--width-tablet);
-      padding: 0 2rem;
       margin: 4rem auto 7.5rem;
     }
   }
