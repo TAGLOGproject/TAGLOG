@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Typography from '@/components/Typography';
 import { IPost } from '@/types/api/post';
 import { formatTime } from '@/utils/dayjs';
+import Tag from '@/components/Tag';
 import styles from './postItem.module.scss';
 
 function PostItem({ postData }: { postData: IPost }) {
@@ -15,17 +16,10 @@ function PostItem({ postData }: { postData: IPost }) {
       <Typography variant="title1" className={styles.postTitle}>
         {title}
       </Typography>
-      <Typography variant="body1" className={styles.postContent}>
+      <Typography variant="body1" className={styles.postSubtitle}>
         {subtitle}
       </Typography>
-      <div className={styles.tagContainer}>
-        {tags &&
-          tags.map((item) => (
-            <div key={item} className={styles.tag}>
-              <Typography variant="body4">{item}</Typography>
-            </div>
-          ))}
-      </div>
+      <div className={styles.tagContainer}>{tags && tags.map((tag) => <Tag tag={tag} />)}</div>
     </Link>
   );
 }
