@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { createPostAPI } from '@/service/post';
 
+import Tag from '@/components/Tag';
 import styles from './editor.module.scss';
 
 // Initialize a markdown parser
@@ -117,17 +118,7 @@ export default function Editor() {
       </div>
       <div className={styles.tagContainer}>
         {tags.map((tag) => (
-          <div className={styles.tag} key={tag}>
-            <span>{tag}</span>
-            <button
-              onClick={() => {
-                onDeleteTag(tag);
-              }}
-              type="button"
-            >
-              X
-            </button>
-          </div>
+          <Tag tag={tag} onDelete={onDeleteTag} />
         ))}
       </div>
       <MdEditor

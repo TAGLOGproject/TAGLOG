@@ -1,4 +1,8 @@
 .markdownWrapper {
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+
   h1 {
     padding: 0;
     margin: 32px 0;
@@ -91,13 +95,13 @@
     overflow-x: auto;
     line-height: 28px;
     word-break: break-word;
-    background-color: var(--color-bg);
+    // background-color: var(--color-bg);
     border-radius: 0;
 
     code {
       padding: 0 4px;
       font-family: 'Roboto Mono', monospace;
-      font-size: 1.25rem;
+      font-size: 0.6rem;
       font-weight: 600;
       color: black;
       border-radius: 4px;

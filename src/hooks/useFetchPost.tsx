@@ -5,17 +5,19 @@ import { useParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { getPostApi } from '@/service/post';
+import { IPost } from '@/types/api/post';
 
 const useFetchPost = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<IPost | IPost[]>();
   const params = useParams();
 
   const getPost = useCallback(async () => {
     try {
       if (!params) return;
       const postId = Number(params.id);
-      const data = await getPostApi(postId);
-      console.log(data);
+      const result = await getPostApi(postId);
+      setData(result);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -27,7 +29,7 @@ const useFetchPost = () => {
     getPost();
   }, [getPost]);
 
-  return { isLoading };
+  return { isLoading, data };
 };
 
 export default useFetchPost;
