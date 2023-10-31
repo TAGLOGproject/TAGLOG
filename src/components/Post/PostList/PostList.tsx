@@ -7,7 +7,7 @@ import PostItem from '../PostItem/PostItem';
 function PostList() {
   const { filteredPostList } = useFilteredPostsStore();
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [postsPerPage] = useState<number>(6);
+  const [postsPerPage] = useState<number>(8);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;

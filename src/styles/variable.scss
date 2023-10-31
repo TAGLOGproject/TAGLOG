@@ -14,24 +14,38 @@
   --color-gray-d: #dddddd;
   --color-gray-e: #eeeeee;
   --color-gray-f: #f6f6f6;
+  --color-gray-g: #2b2b2b;
+  --color-gray-h: #eaeef5;
+
+  --color-box-shadow: rgba(0, 0, 0, 10%);
+  --color-box-shadow-dark: rgba(255, 255, 255, 5%);
+
+  --color-dark-blue: #0d1117;
+  --color-dark-blue-1: #161b22;
 
   --color-bg: #f6f6f6;
+  --color-bg-dark: #232323;
+
+  --color-indigo: #313f9f;
   --color-blue: #0071f0; /* Minimum WCAG AA Pass */
+  --color-blue-1: #3262cb;
+  --color-blue-2: #3299cb;
   --color-red: #eb0d00; /* Minimum WCAG AA Pass */
   --color-red-rgb: 235, 13, 0;
   --color-orange: #ff9500;
   --color-yellow: #ffcc00;
   --color-green: #26873e; /* Minimum WCAG AA Pass */
   --color-teal: #5ac8fa;
-  --color-indigo: #5856d6;
   --color-purple: #af52de;
   --color-pink: #ff2d55;
+
+  --color-mint: #4df4c1;
 
   --color-em: #ff59e3;
 
   // 반응형 기준
   --width-sidebar-default: 280px;
-  --width-sidebar-samll: 220px
+  --width-sidebar-samll: 220px;
   --width-mobile: 768px;
   --width-tablet: 1024px;
   --width-desktop: 1280px;

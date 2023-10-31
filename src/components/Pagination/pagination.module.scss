@@ -5,7 +5,7 @@
   padding-top: 1rem;
   margin-top: 1rem;
   list-style: none;
-  border-top: 2px solid var(--color-secondary);
+  border-top: 2px solid var(--color-primary);
 
   .hidden {
     display: none;
@@ -21,19 +21,16 @@
     margin: 0 4px;
     font-size: 1rem;
     cursor: pointer;
-    border: 1px solid var(--color-secondary);
+    background-color: var(--color-secondary);
+    border: 2px solid transparent;
   }
 
-  p {
-    margin-left: 1rem;
+  .active {
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-primary) !important;
 
-    .page {
-      color: var(--color-blue);
+    button {
+      color: var(--color-text-reverse);
     }
   }
-}
-
-.active {
-  color: var(--color-blue);
-  border: 1px solid var(--color-blue) !important;
 }

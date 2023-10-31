@@ -2,6 +2,7 @@
   display: flex;
   height: 100vh;
   margin: 0 auto;
+  background-color: var(--color-bg1);
 
   .mainWrapper {
     display: flex;
@@ -17,7 +18,7 @@
     .article {
       width: 100%;
       max-width: var(--width-tablet);
-      margin: 4rem auto 7.5rem;
+      margin: 1rem auto 4rem;
     }
   }
 }

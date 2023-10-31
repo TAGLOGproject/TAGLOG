@@ -17,14 +17,14 @@ export default function ToggleThemeButton() {
   return (
     <div
       className={
-        theme === 'light'
-          ? styles.toggleContainer
-          : classNames(styles.toggleContainer, styles.toggleContainerDark)
+        theme === 'dark'
+          ? classNames(styles.toggleContainer, styles.toggleContainerDark)
+          : styles.toggleContainer
       }
     >
       <div
         className={
-          theme === 'light' ? styles.toggleBar : classNames(styles.toggleBar, styles.toggleBarDark)
+          theme === 'dark' ? classNames(styles.toggleBar, styles.toggleBarDark) : styles.toggleBar
         }
       >
         <button
@@ -32,9 +32,9 @@ export default function ToggleThemeButton() {
           aria-label="Toggle Theme"
           onClick={handleButtonClick}
           className={
-            theme === 'light'
-              ? styles.toggleHandler
-              : classNames(styles.toggleHandler, styles.toggleHandlerDark)
+            theme === 'dark'
+              ? classNames(styles.toggleHandler, styles.toggleHandlerDark)
+              : styles.toggleHandler
           }
         />
       </div>
