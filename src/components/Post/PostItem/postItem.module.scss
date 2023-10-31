@@ -1,6 +1,6 @@
 .container {
   padding: 24px;
-  background-color: aliceblue;
+  background-color: var(--color-bg2);
   border-radius: 12px;
 
   &:hover {
@@ -8,27 +8,22 @@
   }
 
   .postDate {
-    color: var(--color-gray-a);
+    color: var(--color-text);
     text-align: right;
   }
 
   .postTitle {
     margin-bottom: 1rem;
+    color: var(--color-primary);
   }
 
-  .postContent {
+  .postSubtitle {
     margin-bottom: 1rem;
+    color: var(--color-text);
   }
 
   .tagContainer {
     display: flex;
     gap: 4px;
-
-    .tag {
-      padding: 4px;
-      color: var(--color-blue);
-      border: 1px solid var(--color-blue);
-      border-radius: 16px;
-    }
   }
 }

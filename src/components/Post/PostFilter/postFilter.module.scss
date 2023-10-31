@@ -8,6 +8,7 @@
     justify-content: space-between;
     width: 100%;
     padding: 4px 12px;
+    color: var(--color-text);
     background-color: var(--color-secondary);
     border-radius: 0.5rem;
   }
@@ -31,6 +32,10 @@
 
       .li {
         padding: 2px 12px;
+
+        button {
+          color: var(--color-text);
+        }
 
         &:hover {
           background-color: var(--color-primary);

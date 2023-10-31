@@ -21,3 +21,37 @@ th,
 td {
   font-family: 'Spoqa Han Sans Neo', sans-serif;
 }
+
+html {
+  --color-primary: #313f9f;
+  --color-secondary: #eaeef5;
+  --color-highlight: #121212;
+  --color-bg1: var(--color-bg);
+  --color-bg2: #eaeef5;
+  --color-overlay: var(--color-gray-7);
+  --color-text: var(--color-gray-1);
+  --color-text-reverse: var(--color-gray-f);
+  --color-boder: var(--color-gray-4);
+}
+
+// html {
+//   --color-primary: var(--color-orange);
+//   --color-secondary: var(--color-yellow);
+//   --color-highlight: #121212;
+//   --color-bg1: var(--color-bg);
+//   --color-bg2: var(--color-teal);
+//   --color-overlay: var(--color-gray-7);
+//   --color-text: var(--color-gray-1);
+//   --color-boder: var(--color-gray-4);
+// }
+
+html[data-theme='dark'] {
+  --color-primary: var(--color-blue-1);
+  --color-secondary: var(--color-blue-2);
+  --color-highlight: #e9ecef;
+  --color-bg1: var(--color-bg-dark);
+  --color-bg2: var(--color-gray-g);
+  --color-overlay: var(--color-gray-e);
+  --color-text: var(--color-gray-f);
+  --color-boder: var(--color-gray-4);
+}
