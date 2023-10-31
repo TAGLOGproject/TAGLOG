@@ -28,7 +28,7 @@
       padding: 8px 0;
       background-color: var(--color-secondary);
       border-radius: 0.5rem;
-      box-shadow: 3px 3px 3px rgba(0, 0, 0, 10%);
+      box-shadow: 3px 3px 3px var(--box-shadow);
 
       .li {
         padding: 2px 12px;
@@ -38,7 +38,7 @@
         }
 
         &:hover {
-          background-color: var(--color-primary);
+          background-color: var(--color-bg1);
         }
       }
     }
