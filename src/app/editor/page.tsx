@@ -28,12 +28,13 @@ export default function Editor() {
   const handleEditorChange = ({ text }: { text: string }) => {
     setMdEditorContents(text);
   };
-
   const onCustomImageUpload = async (file: File) => {
     const fileName = encodeURIComponent(file.name);
-    const fileType = encodeURIComponent(file.type);
 
-    const res = await fetch(`/api/imgupload?file=${fileName}&fileType=${fileType}`);
+    const fileType = encodeURIComponent(file.type);
+    const api = `/api/imgupload?file=${fileName}&fileType=${fileType}`;
+
+    const res = await fetch(api);
     const { url, fields, imgUrl } = await res.json();
 
     const formData = new FormData();

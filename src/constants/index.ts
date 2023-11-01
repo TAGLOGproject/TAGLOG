@@ -10,5 +10,3 @@ export const ROUTES = [
   { path: '/', name: 'HOME' },
   { path: '/editor', name: 'EDITOR' },
 ];
-
-export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
