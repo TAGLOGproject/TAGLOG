@@ -17,12 +17,15 @@ function SnsButtons({ type, uri, theme }: ISnsButtonProps) {
       <Link href={uri}>
         {type === 'github' ? (
           <GitHubSvg width={24} height={24} color={currentColor} />
-        ) : type === 'mail' ? (
-          <MailSvg width={24} height={24} color={currentColor} />
         ) : type === 'linkedin' ? (
           <LinkedInSvg width={24} height={24} color={currentColor} />
         ) : null}
       </Link>
+      {type === 'mail' && (
+        <a href={`mailto:${uri}`}>
+          <MailSvg width={24} height={24} color={currentColor} />
+        </a>
+      )}
     </button>
   );
 }
