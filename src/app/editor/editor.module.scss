@@ -18,7 +18,7 @@
       outline: none;
 
       &::placeholder {
-        color: var(--color-overlay);
+        color: var(--color-text-placeholder);
       }
     }
   }
@@ -26,7 +26,7 @@
   .tagInputContainer {
     display: inline-flex;
     align-items: center;
-    border-bottom: 1px solid var(--color-overlay);
+    border-bottom: 1px solid var(--color-border);
 
     .tagInput {
       padding: 0;
@@ -38,32 +38,25 @@
       outline: none;
 
       &::placeholder {
-        color: var(--color-overlay);
+        color: var(--color-border);
       }
     }
 
     .addButton {
       padding: 4px 8px;
-      color: var(--color-primary);
-      background-color: var(--color-overlay);
+      color: var(--color-text-reverse);
+      background-color: var(--color-primary);
     }
   }
 
   .tagContainer {
     display: flex;
     align-items: center;
-
-    .tag {
-      padding: 4px 8px;
-      margin-right: 4px;
-      color: var(--color-primary);
-      background-color: var(--color-overlay);
-    }
   }
 
   .submitButton {
     padding: 4px 8px;
-    color: var(--color-primary);
-    background-color: var(--color-overlay);
+    color: var(--color-text-reverse);
+    background-color: var(--color-primary);
   }
 }
