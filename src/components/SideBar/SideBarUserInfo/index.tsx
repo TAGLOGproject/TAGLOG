@@ -1,4 +1,3 @@
-import Divider from '@/components/Divider';
 import SnsButtons from '@/components/SnsButtons';
 import Typography from '@/components/Typography';
 import IUserData from '@/types/api/user';

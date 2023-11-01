@@ -4,7 +4,6 @@ import Image from 'next/image';
 import useThemeStore from '@/store/zustand/useThemeStore';
 import useStore from '@/store/zustand/useStore';
 import { MOCK_USER_DATA_1, MOCK_USER_DATA_2, ROUTES } from '@/constants';
-import SnsButtons from '../SnsButtons';
 import styles from './sidebar.module.scss';
 import Typography from '../Typography';
 import SideBarLink from './SideBarLink';
