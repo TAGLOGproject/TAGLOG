@@ -1,5 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import { ROUTES } from '@/constants';
+import useThemeStore from '@/store/zustand/useThemeStore';
+import useStore from '@/store/zustand/useStore';
 import SnsButtons from '../SnsButtons';
 import styles from './sidebar.module.scss';
 import Typography from '../Typography';
@@ -35,6 +39,8 @@ const MOCKDATA: IUerData = {
 };
 
 export default function SideBar() {
+  const theme = useStore(useThemeStore, (state) => state.theme);
+
   return (
     <aside className={styles.sidebarContainer}>
       <Typography variant="h2" className={styles.sidebarTitle}>
@@ -62,7 +68,7 @@ export default function SideBar() {
       </Typography>
       <div className={styles.sidebarButtons}>
         {MOCKDATA.sns.map((v) => {
-          return <SnsButtons key={v.type} type={v.type} uri={v.uri} />;
+          return <SnsButtons key={v.type} type={v.type} uri={v.uri} theme={theme} />;
         })}
       </div>
       <Divider space={16} />
@@ -71,7 +77,7 @@ export default function SideBar() {
       </Typography>
       <div className={styles.sidebarButtons}>
         {MOCKDATA.sns.map((v) => {
-          return <SnsButtons key={v.type} type={v.type} uri={v.uri} />;
+          return <SnsButtons key={v.type} type={v.type} uri={v.uri} theme={theme} />;
         })}
       </div>
       <Divider space={16} />
