@@ -46,11 +46,11 @@ function Typography({ variant = 'span', className, children }: ITypographyProps)
       case 'body1':
         return ['p', styles.body1];
       case 'body2':
-        return ['p', styles.body1];
+        return ['p', styles.body2];
       case 'body3':
-        return ['p', styles.body1];
+        return ['p', styles.body3];
       case 'body4':
-        return ['p', styles.body1];
+        return ['p', styles.body4];
       case 'span':
       default:
         return ['span', styles.span];

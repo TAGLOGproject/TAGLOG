@@ -7,9 +7,8 @@
   // float: left;
   width: 280px;
   height: 90vh;
-  padding-top: 80px;
+  padding-top: 2rem;
   margin: 24px;
-  color: var(--color-white);
   background-color: var(--color-secondary);
   border-radius: 12px;
   @media (width <= 1024px) {
@@ -85,4 +84,11 @@
   gap: 12px;
   align-items: center;
   margin: 16px 0;
+}
+
+.userInfoContents {
+  width: calc(100% - 3rem);
+  margin-bottom: 1rem;
+  text-align: center;
+  word-break: keep-all;
 }
