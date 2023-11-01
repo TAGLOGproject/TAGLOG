@@ -46,6 +46,7 @@
     "import/prefer-default-export": "off",
     "prefer-const": "warn",
     "import/no-mutable-exports": "warn",
+    "react/require-default-props": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

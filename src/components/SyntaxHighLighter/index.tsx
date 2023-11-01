@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Prism } from 'react-syntax-highlighter';
-import { xonokai } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { xonokai, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface IProps {
   language: string;
@@ -14,7 +14,7 @@ interface IProps {
 
 export default function SyntaxHighlighter({ language, children, ...props }: IProps) {
   return (
-    <Prism language={language} PreTag="div" {...props} style={xonokai}>
+    <Prism language={language} PreTag="div" {...props} style={oneLight}>
       {String(children).replace(/\n$/, '')}
     </Prism>
   );

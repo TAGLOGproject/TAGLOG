@@ -1,0 +1,36 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  list-style: none;
+  border-top: 2px solid var(--color-primary);
+
+  .hidden {
+    display: none;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1rem;
+    height: 1rem;
+    padding: 3px;
+    margin: 0 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: var(--color-secondary);
+    border: 2px solid transparent;
+  }
+
+  .active {
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-primary) !important;
+
+    button {
+      color: var(--color-text-reverse);
+    }
+  }
+}

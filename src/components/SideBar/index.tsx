@@ -2,12 +2,13 @@
 
 import Image from 'next/image';
 import { ROUTES } from '@/constants';
-import useModalStore from '@/store/zustand/useModalStore';
-import ToggleThemeButton from '../ToggleThemeButton';
+import useThemeStore from '@/store/zustand/useThemeStore';
+import useStore from '@/store/zustand/useStore';
 import SnsButtons from '../SnsButtons';
 import styles from './sidebar.module.scss';
 import Typography from '../Typography';
 import SideBarLink from './SideBarLink';
+import Divider from '../Divider';
 
 interface IUerData {
   name: string;
@@ -38,20 +39,12 @@ const MOCKDATA: IUerData = {
 };
 
 export default function SideBar() {
-  const setModal = useModalStore((state) => state.setModal);
-
-  const handleModal = () => {
-    setModal();
-  };
+  const theme = useStore(useThemeStore, (state) => state.theme);
 
   return (
     <aside className={styles.sidebarContainer}>
-      <button type="button" onClick={handleModal}>
-        로그인
-      </button>
-      <ToggleThemeButton />
-      <Typography variant="h3" className={styles.sidebarTitle}>
-        눈에 띄지 않는 것의 가치
+      <Typography variant="h2" className={styles.sidebarTitle}>
+        TAGLOG
       </Typography>
       <div className={styles.avatarAnimationWrapper}>
         <div className={styles.avatarWrapper}>
@@ -67,17 +60,27 @@ export default function SideBar() {
           <div className={styles.circle} />
         </div>
       </div>
-      <Typography variant="h2" className={styles.sidebarsubTitle}>
-        {MOCKDATA.subtitle}
+      <Typography variant="body1" className={styles.sidebarsubTitle}>
+        프론트엔드 개발자의 블로그 입니다.
       </Typography>
-      <Typography variant="h2" className={styles.sidebarName}>
-        {MOCKDATA.name}
+      <Typography variant="body1" className={styles.sidebarName}>
+        joonhyuk
       </Typography>
       <div className={styles.sidebarButtons}>
         {MOCKDATA.sns.map((v) => {
-          return <SnsButtons key={v.type} type={v.type} uri={v.uri} />;
+          return <SnsButtons key={v.type} type={v.type} uri={v.uri} theme={theme} />;
         })}
       </div>
+      <Divider space={16} />
+      <Typography variant="body1" className={styles.sidebarName}>
+        dasol
+      </Typography>
+      <div className={styles.sidebarButtons}>
+        {MOCKDATA.sns.map((v) => {
+          return <SnsButtons key={v.type} type={v.type} uri={v.uri} theme={theme} />;
+        })}
+      </div>
+      <Divider space={16} />
       <div className={styles.routesContainer}>
         {ROUTES.map((v) => {
           return <SideBarLink key={v.name} href={v.path} name={v.name} />;

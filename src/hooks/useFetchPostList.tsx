@@ -3,18 +3,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import { getPostListAPI } from '@/service/post';
+import { getPostApi } from '@/service/post';
 import useFilteredPostsStore from '@/store/zustand/useFilteredPostsStore';
 
 const useFetchPostList = () => {
   const { setPostList, filteredPostList } = useFilteredPostsStore();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getPostList = useCallback(async () => {
     try {
-      setIsLoading(true);
-
-      const data = await getPostListAPI();
+      const data = await getPostApi();
       setPostList(data);
       setIsLoading(false);
     } catch (error) {
