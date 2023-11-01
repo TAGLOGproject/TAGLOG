@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import GitHubSvg from '@/assets/svg/github.svg';
 import MailSvg from '@/assets/svg/mail.svg';
 import LinkedInSvg from '@/assets/svg/linkedin.svg';
