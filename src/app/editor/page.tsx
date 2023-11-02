@@ -12,12 +12,12 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import { ErrorMessage } from '@hookform/error-message';
 import { createPostAPI } from '@/service/post';
 
 import Tag from '@/components/Tag';
 import { onCustomImageUpload } from '@/utils/frontend/image';
 import useEditor from '@/hooks/useEditor';
-import { ErrorMessage } from '@hookform/error-message';
 import styles from './editor.module.scss';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
