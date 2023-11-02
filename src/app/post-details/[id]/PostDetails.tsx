@@ -6,9 +6,8 @@ import { IPost } from '@/types/api/post';
 import Tag from '@/components/Tag';
 import styles from './postDetails.module.scss';
 
-function PostDetails({ data }: { data: any }) {
-  const postData = { ...data } as IPost;
-  const { title, tags, body, thumbnail } = postData;
+function PostDetails({ data }: { data: IPost }) {
+  const { title, tags, body, thumbnail } = data;
   return (
     <div className={styles.container}>
       <Typography variant="h1" className={styles.title}>
