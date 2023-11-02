@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAccessToken } from '@/utils/localstorage';
+import { getAccessToken } from '@/utils/frontend/localstorage';
 
 const defaultConfig = {
   baseURL: `/api`,

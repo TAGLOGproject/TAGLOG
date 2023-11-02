@@ -16,7 +16,7 @@ export const ROUTES = [
 export const MOCK_USER_DATA_1: IUserData = {
   name: 'Joonhyuk',
   subtitle: 'Frontend Developer',
-  contents: '디테일의 가치를 아는 Frontend 개발자 이준혁입니다.',
+  contents: '디테일’의 가치를 아는 Front-End 개발자 이준혁입니다.',
   avatar: '/src/assets/image/avatar.jpeg',
   sns: [
     {
@@ -25,7 +25,7 @@ export const MOCK_USER_DATA_1: IUserData = {
     },
     {
       type: 'linkedin',
-      uri: 'www.linkedin.com/in/ian-joon',
+      uri: 'https://www.linkedin.com/in/ian-joon',
     },
     { type: 'mail', uri: 'anshqhsh.dev@gmail.com' },
   ],
@@ -33,7 +33,7 @@ export const MOCK_USER_DATA_1: IUserData = {
 export const MOCK_USER_DATA_2: IUserData = {
   name: 'Dasol',
   subtitle: 'Frontend Developer',
-  contents: '내일’이 더 기대되는 프론트엔드 개발자 정다솔입니다',
+  contents: '내일’이 더 기대되는 Front-End 개발자 정다솔입니다',
   avatar: '/src/assets/image/avatar.jpeg',
   sns: [
     {

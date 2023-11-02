@@ -29,7 +29,7 @@ function MarkdownImage(image: any) {
       alt={alt || ''}
       width={500}
       height={300}
-      // className={classes.markdown_container_img}
+      className={styles.markdownImage}
     />
   );
 }

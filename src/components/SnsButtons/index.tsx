@@ -11,21 +11,22 @@ interface ISnsButtonProps {
 
 function SnsButtons({ type, uri, theme }: ISnsButtonProps) {
   const currentColor = theme === 'light' ? '#000' : '#fff';
+  if (type === 'mail') {
+    return (
+      <a href={`mailto:${uri}`} aria-label={`Send mail to ${uri}`}>
+        <MailSvg width={24} height={24} color={currentColor} />
+      </a>
+    );
+  }
+
   return (
-    <button type="button">
-      <Link href={uri}>
-        {type === 'github' ? (
-          <GitHubSvg width={24} height={24} color={currentColor} />
-        ) : type === 'linkedin' ? (
-          <LinkedInSvg width={24} height={24} color={currentColor} />
-        ) : null}
-      </Link>
-      {type === 'mail' && (
-        <a href={`mailto:${uri}`}>
-          <MailSvg width={24} height={24} color={currentColor} />
-        </a>
+    <Link href={uri} passHref aria-label="sns button">
+      {type === 'github' ? (
+        <GitHubSvg width={24} height={24} color={currentColor} />
+      ) : (
+        <LinkedInSvg width={24} height={24} color={currentColor} />
       )}
-    </button>
+    </Link>
   );
 }
 

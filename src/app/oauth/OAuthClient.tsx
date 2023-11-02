@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
 
 import { postKakaoAuthApi } from '@/service/sign';
-import { getAccessToken, setAccessToken } from '@/utils/localstorage';
+import { getAccessToken, setAccessToken } from '@/utils/frontend/localstorage';
 import LoadingUI from '@/components/LoadingUI';
 
 export default function OAuthClient() {

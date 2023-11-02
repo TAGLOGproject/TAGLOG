@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-children-prop */
 
 'use client';
+
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import MarkdownIt from 'markdown-it';
 import { useState } from 'react';
@@ -9,59 +12,41 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import { ErrorMessage } from '@hookform/error-message';
 import { createPostAPI } from '@/service/post';
 
 import Tag from '@/components/Tag';
+import { onCustomImageUpload } from '@/utils/frontend/image';
+import useEditor from '@/hooks/useEditor';
 import styles from './editor.module.scss';
 
-// Initialize a markdown parser
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
+interface IFormValues {
+  title: string;
+  tagText: string;
+}
+
 export default function Editor() {
-  const [title, setTitle] = useState<string>('');
-  const [tagText, setTagText] = useState<string>('');
+  const { contents: mdEditorContents, handleChange: handleEditorChange } = useEditor();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<IFormValues>({
+    defaultValues: {
+      title: '',
+      tagText: '',
+    },
+  });
   const [tags, setTags] = useState<string[]>([]);
-  const [mdEditorContents, setMdEditorContents] = useState<string>('');
 
   const router = useRouter();
 
-  const handleEditorChange = ({ text }: { text: string }) => {
-    setMdEditorContents(text);
-  };
-  const onCustomImageUpload = async (file: File) => {
-    const fileName = encodeURIComponent(file.name);
-
-    const fileType = encodeURIComponent(file.type);
-    const api = `/api/imgupload?file=${fileName}&fileType=${fileType}`;
-
-    const res = await fetch(api);
-    const { url, fields, imgUrl } = await res.json();
-
-    const formData = new FormData();
-
-    Object.entries({ ...fields, file }).forEach(([key, value]) => {
-      formData.append(key, value as string);
-    });
-
-    const upload = await fetch(url, {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (upload.ok) {
-      return new Promise((resolve) => {
-        const imgMdUrl = imgUrl;
-        resolve(imgMdUrl);
-      });
-    }
-
-    throw new Error('Upload failed.');
-  };
-
-  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
   const onAddTag = () => {
+    const tagText = watch('tagText');
     const trimedText = tagText.trim();
     if (!trimedText) {
       toast.error('태그를 입력해 주세요');
@@ -72,7 +57,7 @@ export default function Editor() {
       return;
     }
     setTags([...tags, trimedText]);
-    setTagText('');
+    setValue('tagText', '');
   };
 
   const onDeleteTag = (tag: string) => {
@@ -80,35 +65,53 @@ export default function Editor() {
     setTags(filterdTag);
   };
 
-  const createPost = async () => {
+  const createPost: SubmitHandler<IFormValues> = async (values) => {
+    const { title } = values;
     try {
       await createPostAPI({ title, tags, body: mdEditorContents });
       toast.success('포스트가 생성되었습니다');
       router.push('/');
     } catch (error: any) {
+      if (title === '') {
+        toast.error('제목을 입력해 주세요');
+        return;
+      }
+      if (error.sttus) {
+        toast.error(error.message);
+        return;
+      }
+      if (error.response.status >= 500) {
+        toast.error('server error');
+        return;
+      }
+      if (error.response.status >= 400 && error.response.status < 500) {
+        toast.error('client error');
+        return;
+      }
       toast.error(error.message);
     }
   };
 
   return (
-    <div className={styles.container}>
+    <form onSubmit={handleSubmit(createPost)} className={styles.container}>
       <div className={styles.titleContainer}>
         <input
+          {...register('title', { required: 'title을 작성해주세요.' })}
           className={styles.titleInput}
-          value={title}
           type="text"
-          placeholder="Title"
-          onChange={onChangeTitle}
+          placeholder="Title을 작성해주세요."
+        />
+        <ErrorMessage
+          errors={errors}
+          name="title"
+          render={({ message }) => <p className={styles.errorMessage}>{message}</p>}
         />
       </div>
       <div>
         <div className={styles.tagInputContainer}>
           <input
+            {...register('tagText')}
             className={styles.tagInput}
-            value={tagText}
-            onChange={(e) => {
-              setTagText(e.target.value);
-            }}
             type="text"
             placeholder="태그를 추가해 주세요"
           />
@@ -119,7 +122,7 @@ export default function Editor() {
       </div>
       <div className={styles.tagContainer}>
         {tags.map((tag) => (
-          <Tag tag={tag} onDelete={onDeleteTag} />
+          <Tag key={tag} tag={tag} onDelete={onDeleteTag} />
         ))}
       </div>
       <MdEditor
@@ -129,9 +132,9 @@ export default function Editor() {
         renderHTML={(text) => mdParser.render(text)}
         onImageUpload={onCustomImageUpload}
       />
-      <button className={styles.submitButton} type="button" onClick={createPost}>
+      <button className={styles.submitButton} type="submit">
         Submit
       </button>
-    </div>
+    </form>
   );
 }
