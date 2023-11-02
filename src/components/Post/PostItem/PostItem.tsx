@@ -19,7 +19,9 @@ function PostItem({ postData }: { postData: IPost }) {
       <Typography variant="body1" className={styles.postSubtitle}>
         {subtitle}
       </Typography>
-      <div className={styles.tagContainer}>{tags && tags.map((tag) => <Tag tag={tag} />)}</div>
+      <div className={styles.tagContainer}>
+        {tags && tags.map((tag) => <Tag key={tag} tag={tag} />)}
+      </div>
     </Link>
   );
 }
