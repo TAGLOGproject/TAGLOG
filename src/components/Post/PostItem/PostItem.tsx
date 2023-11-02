@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Typography from '@/components/Typography';
 import { IPost } from '@/types/api/post';
-import { formatTime } from '@/utils/dayjs';
+import { formatTime } from '@/utils/common/dayjs';
 import Tag from '@/components/Tag';
 import styles from './postItem.module.scss';
 
