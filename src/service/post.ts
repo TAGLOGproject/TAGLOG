@@ -4,7 +4,6 @@ import { instance } from './axios';
 export const createPostAPI = async ({
   title,
   body,
-  thumbnail,
   tags,
 }: {
   title: string;

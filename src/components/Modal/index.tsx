@@ -13,7 +13,6 @@ export default function Modal() {
   const handleModal = () => {
     setModal();
   };
-  console.log({ KAKAO_AUTH_URL });
   return (
     <div className={styles.overlay}>
       <div className={styles.modalContainer}>

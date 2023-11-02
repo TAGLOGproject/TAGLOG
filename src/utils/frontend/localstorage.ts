@@ -4,7 +4,6 @@ const setAccessToken = (token: string) => {
 
 const getAccessToken = () => {
   const token = localStorage.getItem('accessToken');
-  console.log('token', token);
   if (token) {
     return token;
   }
