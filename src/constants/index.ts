@@ -25,7 +25,7 @@ export const MOCK_USER_DATA_1: IUserData = {
     },
     {
       type: 'linkedin',
-      uri: 'www.linkedin.com/in/ian-joon',
+      uri: 'https://www.linkedin.com/in/ian-joon',
     },
     { type: 'mail', uri: 'anshqhsh.dev@gmail.com' },
   ],
