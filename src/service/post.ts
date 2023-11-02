@@ -11,9 +11,10 @@ export const createPostAPI = async ({
   thumbnail?: string;
   tags: string[];
 }) => {
+  const subtitle = body.slice(0, 10);
   const reqBody = {
     title,
-    subtitle: 'subtitle',
+    subtitle,
     body,
     thumbnail: 'https://taglog-image-uploader.s3.ap-northeast-2.amazonaws.com/Test.png',
     user: { userId: 'test', userName: 'test' },
