@@ -7,6 +7,8 @@ import Tag from '@/components/Tag';
 import styles from './postDetails.module.scss';
 
 function PostDetails({ data }: { data: IPost }) {
+  if (data === undefined) return null;
+
   const { title, tags, body, thumbnail } = data;
   return (
     <div className={styles.container}>
