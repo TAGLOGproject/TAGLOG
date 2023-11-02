@@ -144,17 +144,17 @@ TAGLOG
 <img src="https://img.shields.io/badge/AMAZON IAM-569A31?style=for-the-badge&logo=AMAZON IAM&logoColor=black">
 <img src="https://img.shields.io/badge/REACT MARKDOWN-61DAFB?style=for-the-badge&logo=REACT MARKDOWN&logoColor=black"></br>
 <img src="https://img.shields.io/badge/REACT MARKDOWN EDITOR LITE-632CA6?style=for-the-badge&logo=REACT MARKDOWN EDITOR LITE&logoColor=black">
-<img src="https://img.shields.io/badge/REACT SYNTAX HIGHLIGHTER-003E54?style=for-the-badge&logo=REACT SYNTAX HIGHLIGHTER&logoColor=black">
+
 </div>
 
 ### 5. Git Convention 🖍️
 
 | 태그     | 설명                                                                        |
 | -------- | --------------------------------------------------------------------------- |
-| feat:    | 새로운 기능을 추가할 경우                                                   |
+| feat     | 새로운 기능을 추가할 경우                                                   |
 | chore    | 패키지 매니저 설정 등 여러가지 기능과 무관한 부분 들을 수정, 추가 하는 경우 |
-| error:   | 버그를 고친경우                                                             |
-| HOTFIX:  | 치명적인 버그 수정, 운영중 빠른 수정이 필요한 경우                          |
+| error    | 버그를 고친경우                                                             |
+| HOTFIX   | 치명적인 버그 수정, 운영중 빠른 수정이 필요한 경우                          |
 | design   | CSS 등 사용자 UI 디자인 변경                                                |
 | style    | 코드 포맷 변경, 세미콜론 누락 등 기능상의 코드 수정이 없는 경우             |
 | comment  | 주석 추가 및 변경                                                           |
