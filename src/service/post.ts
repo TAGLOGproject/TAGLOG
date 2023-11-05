@@ -1,5 +1,5 @@
 import { IPost } from '@/types/api/post';
-import { instance } from './axios';
+import { authInstance, instance } from './axios';
 
 export const createPostAPI = async ({
   title,
@@ -21,7 +21,7 @@ export const createPostAPI = async ({
     tags,
   };
   console.log('reqBody', reqBody);
-  const { data } = await instance.post('post', reqBody);
+  const { data } = await authInstance.post('post', reqBody);
   return data;
 };
 
