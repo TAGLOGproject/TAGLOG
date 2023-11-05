@@ -8,7 +8,12 @@ function isPublicPath(req: NextRequest) {
 }
 
 export default async function jwtMiddleware(req: NextRequest) {
-  if (!isPublicPath(req)) return;
-  const id = auth.verifyToken();
-  req.headers.set('userId', id);
+  try {
+    if (!isPublicPath(req)) return;
+    const userid = auth.verifyToken();
+    req.headers.set('userid', userid);
+  } catch (error) {
+    console.log('error', error);
+    /* empty */
+  }
 }

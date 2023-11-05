@@ -6,37 +6,39 @@ export default function apiHandler(handler: any) {
   const wrappedHandler: any = {};
   const httpMethods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
 
-  // wrap handler methods to add middleware and global error handler
   httpMethods.forEach((method) => {
     if (typeof handler[method] !== 'function') return;
 
     wrappedHandler[method] = async (req: NextRequest, ...args: any) => {
-      let json: object;
+      // 본문을 단 한 번만 읽고 결과를 저장할 변수 선언
+      let reqBodyParsed = false;
+      let reqBody: any = {};
+
       try {
-        // JSON 파싱이 한번만 가능하기 때문에 req.bodyUsed를 통해 body가 사용되었는지 확인
-        if (req.bodyUsed) {
-          json = await req.json();
-        } else {
-          // body 값이 없는 경우 빈 객체를 할당
-          json = {};
+        if (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') {
+          // 요청 본문을 파싱합니다. 본문이 소비됩니다.
+          reqBody = await req.json();
+          reqBodyParsed = true; // 파싱이 성공했음을 표시
         }
       } catch (e) {
         console.error('Failed to parse JSON:', e);
-        json = {};
+        // JSON 파싱 오류에 대한 응답
+        return new NextResponse(null, { status: 400, statusText: 'Bad Request - Invalid JSON' });
       }
 
-      req.json = async () => json;
-
       try {
-        // 전역 미들 웨어
+        // 전역 미들웨어 실행
         await jwtMiddleware(req);
-        // 그외 미들 웨
-
-        // route handler
-        const responseBody = await handler[method](req, ...args);
+        // 핸들러 함수 실행, 파싱된 본문을 인자로 전달
+        const responseBody = await handler[method](
+          req,
+          ...args,
+          reqBodyParsed ? reqBody : undefined
+        );
         return NextResponse.json(responseBody || {});
       } catch (err: any) {
-        // global error handler
+        console.error('Error in API handler:', err);
+        // 글로벌 에러 핸들러 실행
         return errorHandler(err);
       }
     };

@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import connectDb from '@/lib/dbConnect';
 import { getTokenFromKakao, getUserFromKakao, saveOrUpdateUser } from '@/utils/backend/kakao';
+import User from '@/models/User';
+import { auth } from '@/utils/backend/auth';
 
 export async function POST(req: NextRequest) {
   const { authCode } = await req.json(); // 인가 코드
@@ -11,6 +13,9 @@ export async function POST(req: NextRequest) {
   const tokenResponse = await getTokenFromKakao(authCode);
   // 유저 정보 받아오기
   const userInfo = await getUserFromKakao(tokenResponse);
+
+  const isTrue = auth.verifyToken('refreshToken');
+  console.log('isTrue', isTrue);
 
   try {
     await connectDb();
@@ -25,13 +30,9 @@ export async function POST(req: NextRequest) {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60,
     });
-
+    console.log('response', response.cookies.get('refreshToken'));
     return response;
   } catch (error) {
-    const response = NextResponse.json(
-      { success: 'false', message: 'login fail' },
-      { status: 400 }
-    );
-    return response;
+    return error;
   }
 }

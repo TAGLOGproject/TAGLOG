@@ -20,14 +20,14 @@ export const createPostAPI = async ({
     user: { userId: 'test', userName: 'test' },
     tags,
   };
-
+  console.log('reqBody', reqBody);
   const { data } = await instance.post('post', reqBody);
   return data;
 };
 
 export const getPostApi = async (postId?: number): Promise<IPost[]> => {
   const { data } = await instance.get('post', { params: { postId } });
-  return data.data;
+  return data;
 };
 
 export const deletePostApi = async (postId: number) => {
