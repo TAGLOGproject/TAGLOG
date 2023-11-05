@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
       value: refreshToken,
       httpOnly: true,
     });
+    console.log('response', response.cookies.get('refreshToken'));
     return response;
   } catch (error) {
     return error;

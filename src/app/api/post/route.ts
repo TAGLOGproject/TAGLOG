@@ -5,24 +5,28 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import connectDb from '@/lib/dbConnect';
 import Post from '@/models/Post';
-import { cookies } from 'next/headers';
+
 import User from '@/models/User';
-import apiHandler from '../api-handler';
+import jwtMiddleware from '@/middleware/jwtMiddleware';
+import errorHandler from '@/handler/errorHandler';
 
-module.exports = apiHandler({
-  POST: createPostHandler,
-  GET: getPostHandler,
-});
+// TODO: apiHandler로 감싸기
+// module.exports = apiHandler({
+//   POST: createPostHandler,
+//   GET: getPostHandler,
+// });
 
-async function createPostHandler(req: Request) {
-  console.log('req: ', await req.json());
+export async function POST(req: NextRequest) {
   try {
     await connectDb();
+    await jwtMiddleware(req);
 
     const userObj = await User.findOne({ userid: req.headers.get('userid') as string });
-    // console.log('userObj: ', userObj, '&&&&&&&&&&&&&&', req.headers.get('userid'));
+
+    if (!userObj) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
     const reqBody = await req.json();
-    // console.log('reqBody', reqBody);
 
     const post = await Post.create({
       post_id: Date.now().toString(),
@@ -33,30 +37,28 @@ async function createPostHandler(req: Request) {
       user: userObj,
       tags: reqBody.tags,
     });
-    console.log('post', post);
-    return post;
-  } catch (error) {
-    return NextResponse.error().json();
+
+    return NextResponse.json(post || {});
+  } catch (error: any) {
+    return errorHandler(error);
   }
 }
 
-async function getPostHandler(req: NextRequest) {
-  const cookie = cookies().get('refreshToken');
-
+export async function GET(req: NextRequest) {
   try {
     await connectDb();
     const url = new URL(req.url);
     const postId = url.searchParams.get('postId');
 
     if (postId) {
-      const data = await Post.findOne({
+      const post = await Post.findOne({
         post_id: postId,
       });
-      return data;
+      return NextResponse.json(post || {});
     }
 
-    const data = await Post.find();
-    return data;
+    const postList = await Post.find();
+    return NextResponse.json(postList || {});
   } catch (error) {
     return error;
   }
@@ -70,12 +72,7 @@ export async function DELETE(req: NextRequest) {
     await connectDb();
 
     await Post.deleteOne({ post_id: postId });
-    return NextResponse.json(
-      {
-        success: true,
-      },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: 'success' });
   } catch (error) {
     return NextResponse.error().json();
   }
