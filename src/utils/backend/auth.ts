@@ -2,8 +2,8 @@ import { JWT_SECRET } from '@/constants/backend';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
-function verifyToken(key?: string) {
-  const token = cookies().get(key || 'refreshToken')?.value ?? '';
+function verifyToken() {
+  const token = cookies().get('refreshToken')?.value ?? '';
 
   const decoded = jwt.verify(token, JWT_SECRET as string) as {
     userid: string;
