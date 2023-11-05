@@ -28,8 +28,8 @@ authInstance.interceptors.request.use((config) => {
   }
   const newConfig = { ...config };
   if (accessToken) {
-    const token = typeof accessToken === 'string' ? accessToken : JSON.stringify(accessToken);
-    newConfig.headers.Authorization = `Bearer ${token}`;
+    const tokenWithoutQuotes = accessToken.replace(/^"|"$/g, '');
+    newConfig.headers.Authorization = `Bearer ${tokenWithoutQuotes}`; // 큰따옴표 없이 헤더에 설정
   }
 
   return newConfig;
