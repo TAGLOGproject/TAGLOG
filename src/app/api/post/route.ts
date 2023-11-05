@@ -23,21 +23,18 @@ export async function POST(req: NextRequest) {
     await connectDb();
     await jwtMiddleware(req);
 
-    const userObj = await User.findOne({ userid: req.headers.get('userid') as string });
     const accessToken = req.headers.get('authorization')?.split(' ')[1] || '';
     if (!accessToken) {
       throw new Error('토큰이 제공되지 않았습니다.');
     }
-    console.log('accessToken', accessToken);
-    // const decoded = jwt.verify(token, JWT_SECRET as string) as {
-    //   userid: string;
-    //   email: string;
-    //   iat: number;
-    //   exp: number;
-    // };
 
-    const decoded = jwt.verify(accessToken, JWT_SECRET as string);
-    console.log('check', decoded);
+    const decoded = jwt.verify(accessToken, JWT_SECRET as string) as {
+      userid: string;
+      email: string;
+      iat: number;
+      exp: number;
+    };
+    const userObj = await User.findOne({ userid: decoded.userid });
 
     if (!userObj) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
@@ -58,7 +55,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(post || {});
   } catch (error: any) {
-    console.log('error', error);
     return errorHandler(error);
   }
 }
