@@ -18,6 +18,7 @@ import { createPostAPI } from '@/service/post';
 import Tag from '@/components/Tag';
 import { onCustomImageUpload } from '@/utils/frontend/image';
 import useEditor from '@/hooks/useEditor';
+
 import styles from './editor.module.scss';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -68,16 +69,19 @@ export default function Editor() {
   const createPost: SubmitHandler<IFormValues> = async (values) => {
     const { title } = values;
     try {
-      await createPostAPI({ title, tags, body: mdEditorContents });
+      const resBody = {
+        title,
+        tags,
+        body: mdEditorContents,
+      };
+
+      await createPostAPI(resBody);
+
       toast.success('포스트가 생성되었습니다');
       router.push('/');
     } catch (error: any) {
       if (title === '') {
         toast.error('제목을 입력해 주세요');
-        return;
-      }
-      if (error.sttus) {
-        toast.error(error.message);
         return;
       }
       if (error.response.status >= 500) {
