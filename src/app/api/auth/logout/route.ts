@@ -14,9 +14,6 @@ export async function POST(req: NextRequest) {
   // 유저 정보 받아오기
   const userInfo = await getUserFromKakao(tokenResponse);
 
-  const isTrue = auth.verifyToken('refreshToken');
-  console.log('isTrue', isTrue);
-
   try {
     await connectDb();
     const { accessToken, refreshToken } = await saveOrUpdateUser(userInfo);
@@ -29,7 +26,6 @@ export async function POST(req: NextRequest) {
       value: refreshToken,
       httpOnly: true,
     });
-    console.log('response', response.cookies.get('refreshToken'));
     return response;
   } catch (error) {
     return error;

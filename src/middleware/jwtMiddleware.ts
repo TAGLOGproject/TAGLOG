@@ -13,7 +13,6 @@ export default async function jwtMiddleware(req: NextRequest) {
     const userid = auth.verifyToken();
     req.headers.set('userid', userid);
   } catch (error) {
-    console.log('error', error);
     /* empty */
   }
 }

@@ -20,7 +20,7 @@ export const createPostAPI = async ({
     user: { userId: 'test', userName: 'test' },
     tags,
   };
-  console.log('reqBody', reqBody);
+
   const { data } = await authInstance.post('post', reqBody);
   return data;
 };

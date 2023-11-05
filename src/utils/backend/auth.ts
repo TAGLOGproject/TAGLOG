@@ -4,7 +4,6 @@ import { cookies } from 'next/headers';
 
 function verifyToken() {
   const token = cookies().get('refreshToken')?.value ?? '';
-
   const decoded = jwt.verify(token, JWT_SECRET as string) as {
     userid: string;
     email: string;
