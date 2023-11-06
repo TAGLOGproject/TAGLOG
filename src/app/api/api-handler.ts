@@ -21,7 +21,6 @@ export default function apiHandler(handler: any) {
           reqBodyParsed = true; // 파싱이 성공했음을 표시
         }
       } catch (e) {
-        console.error('Failed to parse JSON:', e);
         // JSON 파싱 오류에 대한 응답
         return new NextResponse(null, { status: 400, statusText: 'Bad Request - Invalid JSON' });
       }
@@ -37,7 +36,6 @@ export default function apiHandler(handler: any) {
         );
         return NextResponse.json(responseBody || {});
       } catch (err: any) {
-        console.error('Error in API handler:', err);
         // 글로벌 에러 핸들러 실행
         return errorHandler(err);
       }

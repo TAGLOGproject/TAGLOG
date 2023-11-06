@@ -4,8 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import connectDb from '@/lib/dbConnect';
 import { getTokenFromKakao, getUserFromKakao, saveOrUpdateUser } from '@/utils/backend/kakao';
-import User from '@/models/User';
-import { auth } from '@/utils/backend/auth';
 
 export async function POST(req: NextRequest) {
   const { authCode } = await req.json(); // 인가 코드

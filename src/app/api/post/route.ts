@@ -74,8 +74,8 @@ export async function GET(req: NextRequest) {
 
     const postList = await Post.find();
     return NextResponse.json(postList || {});
-  } catch (error) {
-    return error;
+  } catch (error: any) {
+    return errorHandler(error);
   }
 }
 
@@ -88,7 +88,7 @@ export async function DELETE(req: NextRequest) {
 
     await Post.deleteOne({ post_id: postId });
     return NextResponse.json({ message: 'success' });
-  } catch (error) {
-    return NextResponse.error().json();
+  } catch (error: any) {
+    return errorHandler(error);
   }
 }
