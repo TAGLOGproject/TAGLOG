@@ -1,33 +1,29 @@
-/* eslint-disable camelcase */
-
 import { NextRequest, NextResponse } from 'next/server';
 
 import connectDb from '@/lib/dbConnect';
-import { getTokenFromKakao, getUserFromKakao, saveOrUpdateUser } from '@/utils/backend/kakao';
+
 import User from '@/models/User';
-import { auth } from '@/utils/backend/auth';
 
 export async function POST(req: NextRequest) {
-  const { authCode } = await req.json(); // 인가 코드
-
-  const tokenResponse = await getTokenFromKakao(authCode);
-  // 유저 정보 받아오기
-  const userInfo = await getUserFromKakao(tokenResponse);
+  const { userId } = await req.json(); // 사용자 ID를 요청 본문에서 추출
 
   try {
+    // 데이터베이스 연결
     await connectDb();
-    const { accessToken, refreshToken } = await saveOrUpdateUser(userInfo);
 
-    // refreshToken은 httpOnly 쿠키로 전달 (accessToken은 body로 전달)
-    // TODO: refreshToken이 만료된경우 카카오 로그인 처리가 되어야함
-    const response = NextResponse.json({ success: 'true', accessToken }, { status: 200 });
-    response.cookies.set({
-      name: 'refreshToken',
-      value: refreshToken,
-      httpOnly: true,
-    });
+    // 사용자를 찾아서 refreshToken 필드를 지웁니다.
+    await User.findOneAndUpdate(
+      { userid: userId }, // 조건에 맞는 문서를 찾음
+      { $unset: { refreshToken: '' } } // refreshToken 필드를 삭제
+    );
+
+    const response = NextResponse.json({ message: 'Logged out successfully.' });
+    response.cookies.delete('refreshToken'); // refreshToken 쿠키를 삭제
+
+    // 성공 응답을 보냅니다.
     return response;
-  } catch (error) {
-    return error;
+  } catch (error: any) {
+    // 에러가 발생하면 에러를 반환합니다.
+    return NextResponse.json({ message: 'Logout failed.', error: error.message }, { status: 500 });
   }
 }
