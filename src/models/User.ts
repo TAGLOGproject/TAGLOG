@@ -1,19 +1,5 @@
 import mongoose from 'mongoose';
 
-// const scheme = {
-//   type: 'kakao',
-//   userid: '1234567890',
-//   nickname: '김개똥',
-//   email: '',
-//   profile_image: '',
-//   thumbnail_image: '',
-//   birthday: '1022',
-//   birthday_type: 'SOLAR',
-//   isAdmin: true,
-//   created_at: '2021-08-15T04:45:02Z',
-//   connected_at: '2023-08-15T04:45:02Z',
-// };
-
 const UserSchema = new mongoose.Schema({
   type: {
     type: String,
