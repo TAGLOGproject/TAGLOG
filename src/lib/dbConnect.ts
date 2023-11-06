@@ -1,3 +1,4 @@
+import errorHandler from '@/handler/errorHandler';
 import mongoose from 'mongoose';
 
 const connectDb = async () => {
@@ -6,8 +7,8 @@ const connectDb = async () => {
       await mongoose.connect(process.env.DATABASE_URL as string);
       console.log('Connected to MongoDB');
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    errorHandler(error);
   }
 };
 

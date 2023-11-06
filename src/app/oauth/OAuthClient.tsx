@@ -2,13 +2,16 @@
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
-
+import jwt from 'jsonwebtoken';
 import { postKakaoAuthApi } from '@/service/sign';
-import { getAccessToken, setAccessToken } from '@/utils/frontend/localstorage';
 import LoadingUI from '@/components/LoadingUI';
+import useAuthStore from '@/store/zustand/useAuthStore';
+import { IUserInfo } from '@/types/auth';
+import { setAccessToken } from '@/utils/frontend/localstorage';
 
 export default function OAuthClient() {
   const searchParams = useSearchParams();
+  const { setUserInfo } = useAuthStore((state) => state);
 
   const authCode = searchParams?.get('code');
 
@@ -17,17 +20,19 @@ export default function OAuthClient() {
   const postKakaoAuth = useCallback(async () => {
     try {
       if (authCode) {
-        const data = await postKakaoAuthApi({ authCode });
-        const { accessToken } = data;
-        setAccessToken(accessToken);
-        // set > get이 잘 동작하는지 확인하기 위한 코드
-        getAccessToken();
+        const token = await postKakaoAuthApi({ authCode });
+
+        const decodedToken = jwt.decode(token) as IUserInfo;
+
+        setAccessToken(token);
+        setUserInfo(decodedToken);
+
         router.push('/');
       }
     } catch (error) {
       throw Error();
     }
-  }, [authCode, router]);
+  }, [authCode, router, setUserInfo]);
 
   useEffect(() => {
     postKakaoAuth();

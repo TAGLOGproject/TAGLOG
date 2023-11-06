@@ -1,5 +1,5 @@
 import { IPost } from '@/types/api/post';
-import { instance } from './axios';
+import { authInstance, instance } from './axios';
 
 export const createPostAPI = async ({
   title,
@@ -21,13 +21,13 @@ export const createPostAPI = async ({
     tags,
   };
 
-  const { data } = await instance.post('post', reqBody);
+  const { data } = await authInstance.post('post', reqBody);
   return data;
 };
 
 export const getPostApi = async (postId?: number): Promise<IPost[]> => {
   const { data } = await instance.get('post', { params: { postId } });
-  return data.data;
+  return data;
 };
 
 export const deletePostApi = async (postId: number) => {
