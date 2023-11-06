@@ -24,6 +24,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
+    match: [/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/, '이메일 형식이 아닙니다.'],
   },
   profile_image: {
     type: String,
