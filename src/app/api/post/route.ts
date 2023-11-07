@@ -13,6 +13,7 @@ import jwtMiddleware from '@/middleware/jwtMiddleware';
 import errorHandler from '@/handler/errorHandler';
 import { JWT_SECRET } from '@/constants/backend';
 import { cookies } from 'next/headers';
+import { generateToken } from '@/utils/backend/auth';
 
 // TODO: apiHandler로 감싸기
 // module.exports = apiHandler({
@@ -39,8 +40,9 @@ export async function POST(req: NextRequest) {
         const refreshToken = cookies().get('refreshToken')?.value ?? '';
         const decodedRefreshToken = jwt.verify(refreshToken, JWT_SECRET as string) as IUserInfo;
 
-        // TODO: token 발급 부분 refactoring 필요
-        accessToken = jwt.sign(decodedRefreshToken, JWT_SECRET as string, {
+        accessToken = generateToken({
+          payload: decodedRefreshToken,
+          secret: JWT_SECRET as string,
           expiresIn: '7d',
         });
 
