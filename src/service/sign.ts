@@ -5,7 +5,7 @@ export const postKakaoAuthApi = async (params: { authCode: string }) => {
   return data;
 };
 
-export const signoutApi = async (params: { userId: number }) => {
+export const signOutApi = async (params: { userId: number }) => {
   const { data } = await authInstance.post('/auth/logout', params);
   return data;
 };
