@@ -1,3 +1,4 @@
+import { IUserInfo } from '@/types/auth';
 import jwt from 'jsonwebtoken';
 /* eslint-disable no-use-before-define */
 /* eslint-disable import/no-import-module-exports */
@@ -11,6 +12,7 @@ import User from '@/models/User';
 import jwtMiddleware from '@/middleware/jwtMiddleware';
 import errorHandler from '@/handler/errorHandler';
 import { JWT_SECRET } from '@/constants/backend';
+import { cookies } from 'next/headers';
 
 // TODO: apiHandler로 감싸기
 // module.exports = apiHandler({
@@ -23,18 +25,35 @@ export async function POST(req: NextRequest) {
     await connectDb();
     await jwtMiddleware(req);
 
-    const accessToken = req.headers.get('authorization')?.split(' ')[1] || '';
+    let accessToken = req.headers.get('authorization')?.split(' ')[1] || '';
+    let decodedAccessToken;
     if (!accessToken) {
       throw new Error('토큰이 제공되지 않았습니다.');
     }
 
-    const decoded = jwt.verify(accessToken, JWT_SECRET as string) as {
-      userid: string;
-      email: string;
-      iat: number;
-      exp: number;
-    };
-    const userObj = await User.findOne({ userid: decoded.userid });
+    try {
+      decodedAccessToken = jwt.verify(accessToken, JWT_SECRET as string) as IUserInfo;
+    } catch (error) {
+      // 토큰이 만료되었을 경우
+      if (error instanceof jwt.TokenExpiredError) {
+        const refreshToken = cookies().get('refreshToken')?.value ?? '';
+        const decodedRefreshToken = jwt.verify(refreshToken, JWT_SECRET as string) as IUserInfo;
+
+        // TODO: token 발급 부분 refactoring 필요
+        accessToken = jwt.sign(decodedRefreshToken, JWT_SECRET as string, {
+          expiresIn: '7d',
+        });
+
+        // 응답 헤더에 토큰을 추가
+        req.headers.set('accesstoken', accessToken);
+      } else {
+        // 다른 오류 처리
+        throw error;
+      }
+    }
+
+    const userObj =
+      decodedAccessToken && (await User.findOne({ userid: decodedAccessToken.userid }));
 
     if (!userObj) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
