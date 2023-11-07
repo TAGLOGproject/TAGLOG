@@ -7,6 +7,7 @@ export type AuthState = {
   userInfo: IUserInfo;
   accessToken: string;
   setAccessToken: (token: string) => void;
+  setUserInfoInit: () => void;
 };
 
 const useAuthStore = create<AuthState>()(
@@ -25,6 +26,17 @@ const useAuthStore = create<AuthState>()(
         if (userInfo) {
           set({ userInfo: userInfo as IUserInfo });
         }
+      },
+      setUserInfoInit: () => {
+        set({
+          userInfo: {
+            userid: 0,
+            email: '',
+            iat: 0,
+            exp: 0,
+          },
+          accessToken: '',
+        });
       },
     }),
     {
