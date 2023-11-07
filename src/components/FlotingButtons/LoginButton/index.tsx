@@ -58,7 +58,7 @@ export default function LoginButton() {
           <Typography variant="body2">{userInfo.email}</Typography>
         </button>
       ) : (
-        <button className={styles.loginButton} type="button" onClick={handleModal}>
+        <button className={styles.signinButton} type="button" onClick={handleModal}>
           <Typography variant="body2"> 로그인</Typography>
         </button>
       )}
@@ -67,7 +67,7 @@ export default function LoginButton() {
         <div className={styles.dropdown} ref={dropdownRef}>
           <ul className={styles.ul}>
             <li className={styles.li}>
-              <button type="button" onClick={handleSignOutClick}>
+              <button type="button" className={styles.signoutButton} onClick={handleSignOutClick}>
                 <Typography variant="body2">로그아웃</Typography>
               </button>
             </li>
