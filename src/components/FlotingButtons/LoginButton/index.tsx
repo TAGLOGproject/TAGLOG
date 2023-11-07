@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import useModalStore from '@/store/zustand/useModalStore';
 import useStore from '@/store/zustand/useStore';
 import useAuthStore from '@/store/zustand/useAuthStore';
 import Typography from '@/components/Typography';
+import { signoutApi } from '@/service/sign';
 import styles from './loginButtons.module.scss';
 
 export default function LoginButton() {
@@ -12,6 +13,7 @@ export default function LoginButton() {
 
   const setModal = useModalStore((state) => state.setModal);
   const userInfo = useStore(useAuthStore, (state) => state.userInfo);
+  const setUserInfoInit = useAuthStore((state) => state.setUserInfoInit);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleModal = () => {
@@ -20,6 +22,19 @@ export default function LoginButton() {
 
   const handleSignOutDropDown = () => {
     setDropdownVisible(true);
+  };
+
+  const handleSignOutClick = async () => {
+    try {
+      if (userInfo && setUserInfoInit) {
+        const param = { userId: userInfo.userid };
+        await signoutApi(param);
+        setUserInfoInit();
+        setDropdownVisible(false);
+      }
+    } catch (error) {
+      throw Error;
+    }
   };
 
   useEffect(() => {
@@ -38,7 +53,7 @@ export default function LoginButton() {
 
   return (
     <div className={styles.container}>
-      {userInfo ? (
+      {userInfo?.email ? (
         <button type="button" className={styles.userInfo} onClick={handleSignOutDropDown}>
           <Typography variant="body2">{userInfo.email}</Typography>
         </button>
@@ -52,7 +67,9 @@ export default function LoginButton() {
         <div className={styles.dropdown} ref={dropdownRef}>
           <ul className={styles.ul}>
             <li className={styles.li}>
-              <Typography variant="body2">로그아웃</Typography>
+              <button type="button" onClick={handleSignOutClick}>
+                <Typography variant="body2">로그아웃</Typography>
+              </button>
             </li>
           </ul>
         </div>
