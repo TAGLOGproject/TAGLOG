@@ -1,4 +1,4 @@
-import { authInstance, instance } from './axios';
+import { authInstance, instance } from '../utils/frontend/axios';
 
 export const kakaoAuthApi = async (params: { authCode: string }) => {
   const { data } = await instance.post('/auth/kakao-login', params);

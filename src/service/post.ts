@@ -1,5 +1,5 @@
 import { IPost } from '@/types/api/post';
-import { authInstance, instance } from './axios';
+import { authInstance, instance } from '../utils/frontend/axios';
 
 export const createPostApi = async ({
   title,
