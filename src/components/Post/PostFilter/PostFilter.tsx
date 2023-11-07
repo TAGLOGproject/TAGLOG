@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useEffect, useRef, useState } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import classNames from 'classnames';
@@ -16,32 +14,32 @@ function PostFilter() {
 
   const { selectedTag, setTag } = useFilteredPostsStore();
 
-  const handleMouseEnter = () => {
-    setIsOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
-
   const handleFilterClick = (tag: TagType) => {
     setTag(tag);
   };
 
   useEffect(() => {
+    const handleMouseEnter = () => {
+      setIsOpen(true);
+    };
+
+    const handleMouseLeave = () => {
+      setIsOpen(false);
+    };
+
     const currentRef = ref.current;
     if (currentRef) {
-      currentRef.addEventListener('mouseleave', handleMouseLeave);
-      currentRef.addEventListener('mouseenter', handleMouseEnter);
+      currentRef.addEventListener('mouseover', handleMouseEnter);
+      currentRef.addEventListener('mouseout', handleMouseLeave);
     }
 
     return () => {
       if (currentRef) {
-        currentRef.removeEventListener('mouseenter', handleMouseEnter);
-        currentRef.removeEventListener('mouseleave', handleMouseLeave);
+        currentRef.removeEventListener('mouseover', handleMouseEnter);
+        currentRef.removeEventListener('mouseout', handleMouseLeave);
       }
     };
-  }, []);
+  }, [ref]);
 
   return (
     <div ref={ref} className={styles.container}>
