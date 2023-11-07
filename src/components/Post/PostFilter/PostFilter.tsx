@@ -3,6 +3,7 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import classNames from 'classnames';
 import useFilteredPostsStore from '@/store/zustand/useFilteredPostsStore';
 import { TagType } from '@/types/tag';
+import Typography from '@/components/Typography';
 import styles from './postFilter.module.scss';
 
 const FILTERED_TAGS: TagType[] = ['All', 'Javascript', 'React', 'Typescript', 'Next'];
@@ -44,7 +45,7 @@ function PostFilter() {
   return (
     <div ref={ref} className={styles.container}>
       <button className={styles.button} type="button">
-        {selectedTag}
+        <Typography variant="body2">{selectedTag}</Typography>
         <AiFillCaretDown size={10} />
       </button>
       <div className={classNames(styles.listWrapper)}>
@@ -53,7 +54,7 @@ function PostFilter() {
             {FILTERED_TAGS.map((item) => (
               <li key={item} className={styles.li}>
                 <button type="button" onClick={() => handleFilterClick(item)}>
-                  {item}
+                  <Typography variant="body2">{item}</Typography>
                 </button>
               </li>
             ))}
