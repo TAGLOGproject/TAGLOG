@@ -1,5 +1,9 @@
-import { auth } from '@/utils/backend/auth';
+import jwt from 'jsonwebtoken';
+
+import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
+import { JWT_SECRET } from '@/constants/backend';
+import { IUserInfo } from '@/types/auth';
 
 function isPublicPath(req: NextRequest) {
   // public routes that don't require authentication
@@ -10,8 +14,13 @@ function isPublicPath(req: NextRequest) {
 export default async function jwtMiddleware(req: NextRequest) {
   try {
     if (!isPublicPath(req)) return;
-    const userid = auth.verifyToken();
-    req.headers.set('userid', userid);
+
+    const token = cookies().get('refreshToken')?.value ?? '';
+    const decoded = jwt.verify(token, JWT_SECRET as string) as IUserInfo;
+
+    const { userid } = decoded;
+
+    req.headers.set('userid', userid.toString());
   } catch (error) {
     /* empty */
   }
