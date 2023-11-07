@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
-import { postKakaoAuthApi } from '@/service/sign';
+import { kakaoAuthApi } from '@/service/sign';
 import LoadingUI from '@/components/LoadingUI';
 import useAuthStore from '@/store/zustand/useAuthStore';
 
@@ -17,7 +17,7 @@ export default function OAuthClient() {
   const postKakaoAuth = useCallback(async () => {
     try {
       if (authCode) {
-        const token = await postKakaoAuthApi({ authCode });
+        const token = await kakaoAuthApi({ authCode });
         setAccessToken(token);
         router.push('/');
       }

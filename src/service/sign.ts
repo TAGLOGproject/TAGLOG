@@ -1,6 +1,6 @@
 import { authInstance, instance } from './axios';
 
-export const postKakaoAuthApi = async (params: { authCode: string }) => {
+export const kakaoAuthApi = async (params: { authCode: string }) => {
   const { data } = await instance.post('/auth/kakao-login', params);
   return data;
 };

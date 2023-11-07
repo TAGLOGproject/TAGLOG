@@ -13,7 +13,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { ErrorMessage } from '@hookform/error-message';
-import { createPostAPI } from '@/service/post';
+import { createPostApi } from '@/service/post';
 
 import Tag from '@/components/Tag';
 import { onCustomImageUpload } from '@/utils/frontend/image';
@@ -75,7 +75,7 @@ export default function Editor() {
         body: mdEditorContents,
       };
 
-      await createPostAPI(resBody);
+      await createPostApi(resBody);
 
       toast.success('포스트가 생성되었습니다');
       router.push('/');
