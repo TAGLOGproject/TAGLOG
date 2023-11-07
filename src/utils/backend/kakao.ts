@@ -1,5 +1,11 @@
 /* eslint-disable camelcase */
-import { JWT_SECRET, KAKAO_API_URL, TOKEN_URL } from '@/constants/backend';
+import {
+  ACCESS_TOKEN_EXPRIRES_IN,
+  JWT_SECRET,
+  KAKAO_API_URL,
+  REFRESH_TOKEN_EXPRIRES_IN,
+  TOKEN_URL,
+} from '@/constants/backend';
 import { KakaoTokenResponse, KakaoUserInfo } from '@/types/api/kakao';
 import User from '@/models/User';
 
@@ -29,13 +35,13 @@ function generateTokens(payload: { userid: number; email: string }) {
   const accessToken = generateToken({
     payload,
     secret: JWT_SECRET as string,
-    expiresIn: '5m',
+    expiresIn: ACCESS_TOKEN_EXPRIRES_IN,
   });
 
   const refreshToken = generateToken({
     payload,
     secret: JWT_SECRET as string,
-    expiresIn: '1h',
+    expiresIn: REFRESH_TOKEN_EXPRIRES_IN,
   });
   return { accessToken, refreshToken };
 }

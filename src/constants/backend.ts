@@ -11,3 +11,6 @@ export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_
 export const TOKEN_URL = (authCode: string) => {
   return `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&code=${authCode}`;
 };
+
+export const ACCESS_TOKEN_EXPRIRES_IN = '1m';
+export const REFRESH_TOKEN_EXPRIRES_IN = '5m';
