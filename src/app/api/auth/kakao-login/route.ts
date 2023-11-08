@@ -16,8 +16,6 @@ export async function POST(req: NextRequest) {
     await connectDb();
     const { accessToken, refreshToken } = await saveOrUpdateUser(userInfo);
 
-    // refreshToken은 httpOnly 쿠키로 전달 (accessToken은 body로 전달)
-    // TODO: refreshToken이 만료된경우 카카오 로그인 처리가 되어야함
     const response = NextResponse.json(accessToken || '');
     response.cookies.set({
       name: 'refreshToken',
