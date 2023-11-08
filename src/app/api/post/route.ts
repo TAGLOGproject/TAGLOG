@@ -1,3 +1,4 @@
+import { IUserInfo } from '@/types/auth';
 import jwt from 'jsonwebtoken';
 /* eslint-disable no-use-before-define */
 /* eslint-disable import/no-import-module-exports */
@@ -10,7 +11,9 @@ import Post from '@/models/Post';
 import User from '@/models/User';
 import jwtMiddleware from '@/middleware/jwtMiddleware';
 import errorHandler from '@/handler/errorHandler';
-import { JWT_SECRET } from '@/constants/backend';
+import { ACCESS_TOKEN_EXPRIRES_IN, JWT_SECRET } from '@/constants/backend';
+import { cookies } from 'next/headers';
+import { generateToken } from '@/utils/backend/auth';
 
 // TODO: apiHandler로 감싸기
 // module.exports = apiHandler({
@@ -23,18 +26,38 @@ export async function POST(req: NextRequest) {
     await connectDb();
     await jwtMiddleware(req);
 
-    const accessToken = req.headers.get('authorization')?.split(' ')[1] || '';
+    let accessToken = req.headers.get('authorization')?.split(' ')[1] || '';
+    let decodedAccessToken;
     if (!accessToken) {
       throw new Error('토큰이 제공되지 않았습니다.');
     }
 
-    const decoded = jwt.verify(accessToken, JWT_SECRET as string) as {
-      userid: string;
-      email: string;
-      iat: number;
-      exp: number;
-    };
-    const userObj = await User.findOne({ userid: decoded.userid });
+    try {
+      decodedAccessToken = jwt.verify(accessToken, JWT_SECRET as string) as IUserInfo;
+    } catch (error) {
+      // 토큰이 만료되었을 경우
+
+      if (error instanceof jwt.TokenExpiredError) {
+        const refreshToken = cookies().get('refreshToken')?.value ?? '';
+        const decodedRefreshToken = jwt.verify(refreshToken, JWT_SECRET as string) as IUserInfo;
+
+        accessToken = generateToken({
+          payload: decodedRefreshToken,
+          secret: JWT_SECRET as string,
+          expiresIn: ACCESS_TOKEN_EXPRIRES_IN,
+        });
+
+        // 응답 헤더에 토큰을 추가
+        req.headers.set('accesstoken', accessToken);
+      } else {
+        // 다른 오류 처리
+
+        throw error;
+      }
+    }
+
+    const userObj =
+      decodedAccessToken && (await User.findOne({ userid: decodedAccessToken.userid }));
 
     if (!userObj) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
@@ -55,7 +78,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(post || {});
   } catch (error: any) {
-    return errorHandler(error);
+    return NextResponse.redirect(new URL('/', req.url));
   }
 }
 
