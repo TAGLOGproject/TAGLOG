@@ -15,12 +15,11 @@ export const authInstance = axios.create(defaultConfig);
 authInstance.interceptors.request.use((config) => {
   const authStore = localStorage.getItem('auth-storage');
   const { accessToken } = authStore ? JSON.parse(authStore).state : '';
-
   if (!accessToken) {
     if (typeof window !== 'undefined') {
       toast.error('토큰이 없습니다.');
       setTimeout(() => {
-        window.location.href = '/'; // 로그인 페이지로 리디렉트합니다.
+        window.location.href = '/';
       }, 1000);
     }
 
@@ -28,10 +27,8 @@ authInstance.interceptors.request.use((config) => {
   }
   const newConfig = { ...config };
   if (accessToken) {
-    const tokenWithoutQuotes = accessToken.replace(/^"|"$/g, '');
-    newConfig.headers.Authorization = `Bearer ${tokenWithoutQuotes}`; // 큰따옴표 없이 헤더에 설정
+    newConfig.headers.Authorization = `Bearer ${accessToken}`;
   }
-
   return newConfig;
 });
 
