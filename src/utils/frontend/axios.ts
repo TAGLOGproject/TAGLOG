@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getAccessToken } from '@/utils/frontend/localstorage';
 import { toast } from 'react-toastify';
 
 const defaultConfig = {
@@ -14,7 +13,8 @@ export const instance = axios.create(defaultConfig);
 export const authInstance = axios.create(defaultConfig);
 
 authInstance.interceptors.request.use((config) => {
-  const accessToken = getAccessToken();
+  const authStore = localStorage.getItem('auth-storage');
+  const { accessToken } = authStore ? JSON.parse(authStore).state : '';
 
   if (!accessToken) {
     if (typeof window !== 'undefined') {
