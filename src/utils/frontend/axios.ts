@@ -34,3 +34,21 @@ authInstance.interceptors.request.use((config) => {
 
   return newConfig;
 });
+
+authInstance.interceptors.response.use(
+  (response) => {
+    const token = response.headers['X-Access-Token'];
+
+    const authStore = localStorage.getItem('auth-storage');
+    const authData = authStore ? JSON.parse(authStore) : {};
+
+    authData.accessToken = token;
+
+    localStorage.setItem('auth-storage', JSON.stringify(authData));
+
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
