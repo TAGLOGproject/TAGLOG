@@ -26,33 +26,61 @@ export async function POST(req: NextRequest) {
     await connectDb();
     await jwtMiddleware(req);
 
-    let accessToken = req.headers.get('authorization')?.split(' ')[1] || '';
-    let decodedAccessToken;
+    const accessToken = req.headers.get('Authorization')?.split(' ')[1] || '';
+
+    let newAccessToken;
+
     if (!accessToken) {
       throw new Error('토큰이 제공되지 않았습니다.');
     }
 
+    let decodedAccessToken;
+
     try {
       decodedAccessToken = jwt.verify(accessToken, JWT_SECRET as string) as IUserInfo;
     } catch (error) {
-      // 토큰이 만료되었을 경우
-
       if (error instanceof jwt.TokenExpiredError) {
-        const refreshToken = cookies().get('refreshToken')?.value ?? '';
-        const decodedRefreshToken = jwt.verify(refreshToken, JWT_SECRET as string) as IUserInfo;
+        // accessToken이 만료되었을 때 refreshToken을 사용하여 새로운 accessToken 발급 시도
+        const refreshToken = cookies().get('refreshToken')?.value;
 
-        accessToken = generateToken({
-          payload: decodedRefreshToken,
-          secret: JWT_SECRET as string,
-          expiresIn: ACCESS_TOKEN_EXPRIRES_IN,
-        });
+        if (!refreshToken) {
+          throw new Error('refreshToken이 제공되지 않았습니다.');
+        }
+        let decodedRefreshToken;
+        try {
+          decodedRefreshToken = jwt.verify(refreshToken, JWT_SECRET as string) as IUserInfo;
+        } catch (e: any) {
+          // refreshToken이 유효하지않을때 로그아웃 로직
+          const response = NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+          response.cookies.delete('refreshToken'); // refreshToken 쿠키를 삭제
+          const decoded = jwt.decode(refreshToken);
 
-        // 응답 헤더에 토큰을 추가
-        req.headers.set('accesstoken', accessToken);
+          // 타입 가드
+          if (typeof decoded === 'object' && decoded !== null && 'userid' in decoded) {
+            const userid = decoded?.userid;
+            await User.findOneAndUpdate(
+              { userid }, // 조건에 맞는 문서를 찾음
+              { $unset: { refreshToken: '' } } // refreshToken 필드를 삭제
+            );
+            return response;
+          }
+        }
+
+        if (decodedRefreshToken) {
+          const tokenPayload = {
+            userid: decodedRefreshToken.userid,
+            email: decodedRefreshToken.email,
+          };
+          // 응답 헤더에 새로운 accessToken 초기화
+          newAccessToken = generateToken({
+            payload: tokenPayload,
+            secret: JWT_SECRET as string,
+            expiresIn: ACCESS_TOKEN_EXPRIRES_IN,
+          });
+          decodedAccessToken = jwt.verify(newAccessToken, JWT_SECRET as string) as IUserInfo;
+        }
       } else {
-        // 다른 오류 처리
-
-        throw error;
+        throw error; // 다른 에러 처리
       }
     }
 
@@ -62,8 +90,8 @@ export async function POST(req: NextRequest) {
     if (!userObj) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
-    const reqBody = await req.json();
 
+    const reqBody = await req.json();
     const { title, subtitle, body, thumbnail, tags } = reqBody;
 
     const post = await Post.create({
@@ -76,7 +104,10 @@ export async function POST(req: NextRequest) {
       tags,
     });
 
-    return NextResponse.json(post || {});
+    const response = NextResponse.json(post || {});
+
+    if (newAccessToken) response.headers.set('X-Access-Token', newAccessToken);
+    return response;
   } catch (error: any) {
     return NextResponse.redirect(new URL('/', req.url));
   }
