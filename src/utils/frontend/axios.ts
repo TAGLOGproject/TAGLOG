@@ -34,14 +34,14 @@ authInstance.interceptors.request.use((config) => {
 
 authInstance.interceptors.response.use(
   (response) => {
-    const token = response.headers['X-Access-Token'];
+    const token = response.headers['x-access-token'];
 
-    const authStore = localStorage.getItem('auth-storage');
-    const authData = authStore ? JSON.parse(authStore) : {};
-
-    authData.accessToken = token;
-
-    localStorage.setItem('auth-storage', JSON.stringify(authData));
+    if (token) {
+      const authStore = localStorage.getItem('auth-storage');
+      const authData = authStore ? JSON.parse(authStore) : {};
+      authData.accessToken = token;
+      localStorage.setItem('auth-storage', JSON.stringify(authData));
+    }
 
     return response;
   },
