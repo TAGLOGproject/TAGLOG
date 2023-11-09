@@ -1,15 +1,8 @@
 import SnsButtons from '@/components/SnsButtons';
 import Typography from '@/components/Typography';
-import IUserData from '@/types/api/user';
 import styles from '../sidebar.module.scss';
 
-export default function SideBarUserInfo({
-  user,
-  theme,
-}: {
-  user: IUserData;
-  theme?: 'light' | 'dark';
-}) {
+export default function SideBarUserInfo({ user, theme }: { user: any; theme?: 'light' | 'dark' }) {
   return (
     <>
       <Typography variant="body1" className={styles.sidebarName}>
@@ -19,7 +12,7 @@ export default function SideBarUserInfo({
         {user.contents}
       </Typography>
       <div className={styles.sidebarButtons}>
-        {user.sns.map((v) => {
+        {user.sns.map((v: any) => {
           return <SnsButtons key={v.type} type={v.type} uri={v.uri} theme={theme} />;
         })}
       </div>
