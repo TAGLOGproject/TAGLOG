@@ -62,37 +62,3 @@ const PostSchema = new mongoose.Schema({
 });
 
 export default mongoose.models.post || mongoose.model('post', PostSchema);
-
-// export const DATA: IPost = {
-//   _id: 'a6ad4723-2e39-46b8-86b3-5eca43abcf4d',
-//   title: 'title',
-//   body: '> 예시 MOCKING DATA 입니다.\n> \n\n>',
-//   thumbnail: 'image url',
-//   created_at: '2023-06-21T05:52:25.903Z',
-//   edited_at: '2023-07-01T13:45:03.263Z',
-//   is_temp: false,
-//   comments: [
-//     {
-//       commentId: '20230101_1',
-//       userid: 1,
-//       nickname: '닉네임',
-//       contents: '댓글 내용',
-//       comments: [],
-//     },
-//   ],
-//   comments_count: 0,
-//   tags: ['js', 'ts', 'react'],
-//   like_count: 0,
-//   tag_recommend_post: [
-//     {
-//       id: 'a6ad4723-2e39-46b8-86b3-5eca43abcf4d',
-//       title: '1번글',
-//       nickname: '닉네임',
-//       created_at: '2023-06-21T05:52:25.903Z',
-//       like_count: 0,
-//       comments_count: 0,
-//     },
-//   ],
-//   post_id: '',
-//   subtitle: '',
-// };
