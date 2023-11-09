@@ -26,23 +26,19 @@ export async function POST(req: NextRequest) {
     await connectDb();
     await jwtMiddleware(req);
 
-    const accessToken = req.headers.get('Authorization')?.split(' ')[1] || '';
-
     let newAccessToken;
-
-    if (!accessToken) {
-      throw new Error('토큰이 제공되지 않았습니다.');
-    }
-
     let decodedAccessToken;
 
     try {
+      const accessToken = req.headers.get('Authorization')?.split(' ')[1] || '';
+      if (!accessToken) {
+        throw new Error('missing token');
+      }
       decodedAccessToken = jwt.verify(accessToken, JWT_SECRET as string) as IUserInfo;
-    } catch (error) {
-      if (error instanceof jwt.TokenExpiredError) {
-        // accessToken이 만료되었을 때 refreshToken을 사용하여 새로운 accessToken 발급 시도
+    } catch (error: any) {
+      // accessToken이 만료되었거나 api request에 token이 없을때 처리 (front에서 api 요청을 안하긴 함.)
+      if (error instanceof jwt.TokenExpiredError || error.name === 'missing token') {
         const refreshToken = cookies().get('refreshToken')?.value;
-
         if (!refreshToken) {
           throw new Error('refreshToken이 제공되지 않았습니다.');
         }
@@ -80,7 +76,7 @@ export async function POST(req: NextRequest) {
           decodedAccessToken = jwt.verify(newAccessToken, JWT_SECRET as string) as IUserInfo;
         }
       } else {
-        throw error; // 다른 에러 처리
+        errorHandler(error);
       }
     }
 
@@ -88,7 +84,7 @@ export async function POST(req: NextRequest) {
       decodedAccessToken && (await User.findOne({ userid: decodedAccessToken.userid }));
 
     if (!userObj) {
-      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+      throw new Error('user not found');
     }
 
     const reqBody = await req.json();
@@ -109,7 +105,8 @@ export async function POST(req: NextRequest) {
     if (newAccessToken) response.headers.set('X-Access-Token', newAccessToken);
     return response;
   } catch (error: any) {
-    return NextResponse.redirect(new URL('/', req.url));
+    // return NextResponse.redirect(new URL('/', req.url)); // front에서 리다이렉트
+    return errorHandler(error);
   }
 }
 
@@ -123,7 +120,10 @@ export async function GET(req: NextRequest) {
       const post = await Post.findOne({
         post_id: postId,
       });
-      return NextResponse.json(post || {});
+      if (!post) {
+        throw new Error('post not found');
+      }
+      return NextResponse.json(post);
     }
 
     const postList = await Post.find();
@@ -140,9 +140,16 @@ export async function DELETE(req: NextRequest) {
   try {
     await connectDb();
 
-    await Post.deleteOne({ post_id: postId });
-    return NextResponse.json({ message: 'success' });
+    const result = await Post.deleteOne({ post_id: postId });
+    // 삭제된 문서의 수가 0인지 확인
+    if (result.deletedCount === 0) {
+      throw new Error('Post not found');
+    }
+
+    // 문서가 성공적으로 삭제되었으므로 성공 메시지 반환
+    return NextResponse.json({ message: 'Post successfully deleted' });
   } catch (error: any) {
+    // 에러 처리기로 에러를 전달
     return errorHandler(error);
   }
 }

@@ -1,20 +1,28 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 
-export default function errorHandler(err: Error | string) {
-  if (typeof err === 'string') {
+/**
+ *
+ * @param error - Error | string Unauthorized
+ * @returns NextResponse
+ */
+export default function errorHandler(error: Error | string) {
+  if (typeof error === 'string') {
     // custom application error
-    const is404 = err.toLowerCase().endsWith('not found');
-    const status = is404 ? 404 : 400;
-    return NextResponse.json({ message: err }, { status });
+    const is404 = error.toLowerCase().endsWith('not found');
+    let status = is404 ? 404 : 400;
+
+    // error 처리를 따로 해줘야 하는 경우에 사용
+    if (error === 'Unauthorized') {
+      status = 401;
+      return NextResponse.json({ message: error }, { status });
+    }
+    return NextResponse.json({ message: error }, { status });
   }
 
-  if (err.name === 'JsonWebTokenError') {
-    // jwt error - delete cookie to auto logout
-    // cookies().delete('authorization');
+  if (error.name === 'JsonWebTokenError') {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 
   // default to 500 server error
-  return NextResponse.json({ message: err.message }, { status: 500 });
+  return NextResponse.json({ message: error.message }, { status: 500 });
 }
