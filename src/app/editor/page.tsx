@@ -19,6 +19,7 @@ import Tag from '@/components/Tag';
 import { onCustomImageUpload } from '@/utils/frontend/image';
 import useEditor from '@/hooks/useEditor';
 
+import useAuthStore from '@/store/zustand/useAuthStore';
 import styles from './editor.module.scss';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -45,6 +46,8 @@ export default function Editor() {
   const [tags, setTags] = useState<string[]>([]);
 
   const router = useRouter();
+
+  const setUserInfoInit = useAuthStore((state) => state.setUserInfoInit);
 
   const onAddTag = () => {
     const tagText = watch('tagText');
@@ -88,8 +91,10 @@ export default function Editor() {
         toast.error('server error');
         return;
       }
-      if (error.response.status >= 400 && error.response.status < 500) {
-        toast.error('client error');
+      if (error.response.status === 401) {
+        toast.error('Unauthorized : 로그인을 다시 해주세요');
+        setUserInfoInit();
+        router.push('/');
         return;
       }
       toast.error(error.message);

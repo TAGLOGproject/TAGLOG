@@ -17,13 +17,13 @@ authInstance.interceptors.request.use((config) => {
   const { accessToken } = authStore ? JSON.parse(authStore).state : '';
   if (!accessToken) {
     if (typeof window !== 'undefined') {
-      toast.error('토큰이 없습니다.');
+      toast.error('Unauthorized : 로그인을 다시 해주세요');
       setTimeout(() => {
         window.location.href = '/';
       }, 1000);
     }
 
-    return Promise.reject(new Error('토큰이 없습니다.'));
+    return Promise.reject(new Error('Unauthorized : 로그인을 다시 해주세요'));
   }
   const newConfig = { ...config };
   if (accessToken) {
