@@ -6,10 +6,14 @@ import useStore from '@/store/zustand/useStore';
 import useAuthStore from '@/store/zustand/useAuthStore';
 import Typography from '@/components/Typography';
 import { signOutApi } from '@/service/sign';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 import styles from './SignInButton.module.scss';
 
 export default function SignInButton() {
   const [isDropdownVisible, setDropdownVisible] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const setModal = useModalStore((state) => state.setModal);
   const userInfo = useStore(useAuthStore, (state) => state.userInfo);
@@ -31,9 +35,12 @@ export default function SignInButton() {
         await signOutApi(param);
         setUserInfoInit();
         setDropdownVisible(false);
+        toast.success('로그아웃 되었습니다');
+        router.push('/');
       }
-    } catch (error) {
-      throw Error;
+    } catch (error: any) {
+      toast.error(error);
+      router.push('/');
     }
   };
 
