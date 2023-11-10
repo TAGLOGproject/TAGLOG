@@ -72,6 +72,7 @@ TAGLOG
 - `OAuth2.0 인증/인가 프로토콜을` 활용하였고, 이를 통해 `유저의 편의성`을 높임.
 - 카카오 서버로부터 받은 인가 코드를 `Next.js의 useSearchParams 훅`을 사용하여 클라이언트에 저장.
 - `Token(JWT)방식`을 사용하고, 서버로부터 받은 accessToken을 Local storage에 저장.
+- `유저 정보 및 accessToken`을 `Zunstand`에서 관리하고, `perisist 미들웨어`를 사용해 `localStorage에 저장`함으로서 `새로고침시에도 데이터가 유지`되도록 함
 
 ✅ **Light/Dark 테마 기능 구현**
 
@@ -89,7 +90,8 @@ TAGLOG
 
 ✅ **Zustand 라이브러리 사용해 전역 상태 관리**
 
-- 게시글 관련 상태와 필터 액션을 스토어에서 관리하여 `태그에 따른 게시글 필터`시 `API 호출을 최소화` .
+- `유저 정보 및 accessToken`을 `Zunstand`에서 관리
+- 게시글 관련 상태와 필터 액션을 스토어에서 관리하여 `태그에 따른 게시글 필터`시 `API 호출을 최소화`.
 - Theme의 `light/dark 상태와 액션`을 스토어에서 관리.
 - 로그인 기능을 별도의 페이지 없이 DropDown으로 구현하였기에, DropDown의 open/close 상태와 액션을 스토어에서 관리.
 
