@@ -3,6 +3,16 @@
     margin-bottom: 2rem;
   }
 
+  .modifyButtons {
+    display: flex;
+    justify-content: end;
+
+    .button {
+      color: var(--color-text);
+      cursor: pointer;
+    }
+  }
+
   .tagWrapper {
     margin-bottom: 1rem;
   }

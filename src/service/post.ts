@@ -30,7 +30,7 @@ export const getPostApi = async (postId?: number): Promise<IPost[]> => {
   return data;
 };
 
-export const deletePostApi = async (postId: number) => {
+export const deletePostApi = async (postId: string) => {
   const { data } = await instance.delete('post', { params: { postId } });
   return data;
 };

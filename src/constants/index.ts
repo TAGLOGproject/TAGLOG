@@ -1,5 +1,3 @@
-import IUserData from '@/types/api/user';
-
 // responsible layout constants
 export const DESKTOP_WIDTH = 1280;
 export const TABLET_WIDTH = 768;
@@ -13,7 +11,7 @@ export const ROUTES = [
   { path: '/editor', name: 'EDITOR' },
 ];
 
-export const MOCK_USER_DATA_1: IUserData = {
+export const MOCK_USER_DATA_1 = {
   name: 'Joonhyuk',
   subtitle: 'Frontend Developer',
   contents: '디테일’의 가치를 아는 Front-End 개발자 이준혁입니다.',
@@ -30,7 +28,7 @@ export const MOCK_USER_DATA_1: IUserData = {
     { type: 'mail', uri: 'anshqhsh.dev@gmail.com' },
   ],
 };
-export const MOCK_USER_DATA_2: IUserData = {
+export const MOCK_USER_DATA_2 = {
   name: 'Dasol',
   subtitle: 'Frontend Developer',
   contents: '내일’이 더 기대되는 Front-End 개발자 정다솔입니다',
