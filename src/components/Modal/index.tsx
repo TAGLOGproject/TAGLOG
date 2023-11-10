@@ -6,6 +6,7 @@ import Image from 'next/image';
 import useModalStore from '@/store/zustand/useModalStore';
 import { KAKAO_AUTH_URL } from '@/constants/backend';
 import styles from './modal.module.scss';
+import Typography from '../Typography';
 
 export default function Modal() {
   const setModal = useModalStore((state) => state.setModal);
@@ -16,26 +17,20 @@ export default function Modal() {
   return (
     <div className={styles.overlay}>
       <div className={styles.modalContainer}>
-        <div className={styles.exitModalBtnWrapper}>
-          <button
-            className={styles.exitModalBtn}
-            type="button"
-            onClick={() => {
-              handleModal();
-            }}
-          >
-            <Image src="/svgs/cross-mark.png" alt="exitButton" width={25} height={25} />
-          </button>
+        <div className={styles.logo}>
+          <Typography variant="h2">TAGLOG</Typography>
         </div>
-        <a href={KAKAO_AUTH_URL}>
-          <div className={styles.signinBtn}>
-            <Image
-              src="/svgs/kakao_login_medium_wide.png"
-              alt="signinButton"
-              width={200}
-              height={40}
-            />
-          </div>
+        <button
+          className={styles.exitModalBtn}
+          type="button"
+          onClick={() => {
+            handleModal();
+          }}
+        >
+          x
+        </button>
+        <a className={styles.signinBtn} href={KAKAO_AUTH_URL}>
+          <Image src="/kakao_login_large_wide.png" alt="signinButton" width={400} height={60} />
         </a>
       </div>
     </div>
