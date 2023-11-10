@@ -20,7 +20,13 @@ import { generateToken } from '@/utils/backend/auth';
 //   POST: createPostHandler,
 //   GET: getPostHandler,
 // });
-
+interface UpdateAndCreatePostRequestBody {
+  title?: string;
+  subtitle?: string;
+  body?: string;
+  thumbnail?: string;
+  tags?: string[];
+}
 export async function POST(req: NextRequest) {
   try {
     await connectDb();
@@ -87,7 +93,7 @@ export async function POST(req: NextRequest) {
       throw new Error('user not found');
     }
 
-    const reqBody = await req.json();
+    const reqBody = (await req.json()) as UpdateAndCreatePostRequestBody;
     const { title, subtitle, body, thumbnail, tags } = reqBody;
 
     const post = await Post.create({
@@ -129,6 +135,38 @@ export async function GET(req: NextRequest) {
     const postList = await Post.find();
     return NextResponse.json(postList || {});
   } catch (error: any) {
+    return errorHandler(error);
+  }
+}
+
+export async function PUT(req: NextRequest) {
+  const url = new URL(req.url);
+  const postId = url.searchParams.get('postId');
+
+  try {
+    await connectDb();
+
+    const existingPost = await Post.findOne({
+      post_id: postId,
+    });
+
+    if (!existingPost) {
+      throw new Error('Post not found');
+    }
+
+    const reqBody = (await req.json()) as UpdateAndCreatePostRequestBody;
+
+    existingPost.title = reqBody.title;
+    existingPost.subtitle = reqBody.subtitle;
+    existingPost.body = reqBody.body;
+    existingPost.thumbnail = reqBody.thumbnail;
+    existingPost.tags = reqBody.tags;
+
+    // Save the updated post
+    const updatedPost = await existingPost.save();
+    return NextResponse.json(updatedPost);
+  } catch (error: any) {
+    // Handle errors
     return errorHandler(error);
   }
 }
