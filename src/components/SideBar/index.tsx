@@ -4,6 +4,7 @@ import Image from 'next/image';
 import useThemeStore from '@/store/zustand/useThemeStore';
 import useStore from '@/store/zustand/useStore';
 import { MOCK_USER_DATA_1, MOCK_USER_DATA_2, ROUTES } from '@/constants';
+import Link from 'next/link';
 import styles from './sidebar.module.scss';
 import Typography from '../Typography';
 import SideBarLink from './SideBarLink';
@@ -15,9 +16,11 @@ export default function SideBar() {
 
   return (
     <aside className={styles.sidebarContainer}>
-      <Typography variant="h2" className={styles.sidebarTitle}>
-        TAGLOG
-      </Typography>
+      <Link href="/">
+        <Typography variant="h2" className={styles.sidebarTitle}>
+          TAGLOG
+        </Typography>
+      </Link>
       <div className={styles.avatarAnimationWrapper}>
         <div className={styles.avatarWrapper}>
           <Image src="/avatar.jpg" alt="avatar" width="200" height="200" />
