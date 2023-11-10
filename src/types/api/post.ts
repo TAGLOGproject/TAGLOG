@@ -1,3 +1,5 @@
+import { IUserData } from './user';
+
 export interface IReqPost {
   title: string;
   subtitle: string;
@@ -14,11 +16,7 @@ export interface IPost extends IReqPost {
   is_temp: boolean;
   comments: object;
   comments_count: number;
-  user?: {
-    userId: string;
-    nickName: string;
-    thumbnail: string;
-  };
+  user?: IUserData;
   like_count: number;
   tag_recommend_post: Array<any>;
 }

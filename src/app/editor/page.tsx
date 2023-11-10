@@ -6,18 +6,21 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import MarkdownIt from 'markdown-it';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MdEditor from 'react-markdown-editor-lite';
 
 import 'react-markdown-editor-lite/lib/index.css';
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ErrorMessage } from '@hookform/error-message';
-import { createPostAPI } from '@/service/post';
+import { createPostApi, updatePostApi } from '@/service/post';
 
 import Tag from '@/components/Tag';
 import { onCustomImageUpload } from '@/utils/frontend/image';
 import useEditor from '@/hooks/useEditor';
+
+import useAuthStore from '@/store/zustand/useAuthStore';
+import useUpdatePostStore from '@/store/zustand/useUpdatePostStore';
 import styles from './editor.module.scss';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -28,7 +31,12 @@ interface IFormValues {
 }
 
 export default function Editor() {
-  const { contents: mdEditorContents, handleChange: handleEditorChange } = useEditor();
+  const { postData, setPostDataInitialize } = useUpdatePostStore((state) => state);
+  const {
+    contents: mdEditorContents,
+    handleChange: handleEditorChange,
+    setContents: setMdEditorContents,
+  } = useEditor();
   const {
     register,
     handleSubmit,
@@ -42,8 +50,19 @@ export default function Editor() {
     },
   });
   const [tags, setTags] = useState<string[]>([]);
-
+  const postId = useSearchParams()?.get('id');
   const router = useRouter();
+
+  // 수정을 위한 로직
+  useEffect(() => {
+    if (postId && postData) {
+      setValue('title', postData?.title);
+      setTags(postData.tags);
+      setMdEditorContents(postData.body);
+    }
+  }, [postData, postId, setMdEditorContents, setPostDataInitialize, setValue]);
+
+  const setUserInfoInit = useAuthStore((state) => state.setUserInfoInit);
 
   const onAddTag = () => {
     const tagText = watch('tagText');
@@ -61,31 +80,41 @@ export default function Editor() {
   };
 
   const onDeleteTag = (tag: string) => {
-    const filterdTag = tags.filter((t) => t !== tag);
+    const filterdTag = tags.filter((v) => v !== tag);
     setTags(filterdTag);
   };
 
-  const createPost: SubmitHandler<IFormValues> = async (values) => {
+  const createOrUpdatePost: SubmitHandler<IFormValues> = async (values) => {
     const { title } = values;
     try {
-      await createPostAPI({ title, tags, body: mdEditorContents });
-      toast.success('포스트가 생성되었습니다');
+      const reqBody = {
+        title,
+        tags,
+        body: mdEditorContents,
+      };
+
+      if (postId && postData) {
+        await updatePostApi({ ...reqBody, postId });
+        setPostDataInitialize();
+        toast.success('수정이 완료되었습니다');
+      } else {
+        await createPostApi(reqBody);
+        toast.success('포스트가 생성되었습니다');
+      }
       router.push('/');
     } catch (error: any) {
       if (title === '') {
         toast.error('제목을 입력해 주세요');
         return;
       }
-      if (error.sttus) {
-        toast.error(error.message);
-        return;
-      }
-      if (error.response.status >= 500) {
+      if (error.response.status === 500) {
         toast.error('server error');
         return;
       }
-      if (error.response.status >= 400 && error.response.status < 500) {
-        toast.error('client error');
+      if (error.response.status === 401) {
+        toast.error('Unauthorized : 로그인을 다시 해주세요');
+        setUserInfoInit();
+        router.push('/');
         return;
       }
       toast.error(error.message);
@@ -93,7 +122,7 @@ export default function Editor() {
   };
 
   return (
-    <form onSubmit={handleSubmit(createPost)} className={styles.container}>
+    <form onSubmit={handleSubmit(createOrUpdatePost)} className={styles.container}>
       <div className={styles.titleContainer}>
         <input
           {...register('title', { required: 'title을 작성해주세요.' })}

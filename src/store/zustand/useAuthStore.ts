@@ -1,31 +1,51 @@
+import jwt from 'jsonwebtoken';
+import { IUserInfo } from '@/types/auth';
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
-export type persistState = {
-  accessToken: '';
-  setAccessToken: () => void;
-  useInfo: {
-    userId: string;
-    name: string;
-    email: string;
-  };
+export type AuthState = {
+  userInfo: IUserInfo;
+  accessToken: string;
+  setAccessToken: (token: string) => void;
+  setUserInfoInit: () => void;
 };
 
-const useAuthStore = create<persistState>()(
+const useAuthStore = create<AuthState>()(
   persist(
-    (set, get) => ({
-      accessToken: '',
-      setAccessToken: () => set({ accessToken: get().accessToken }),
-      useInfo: {
-        userId: '',
-        name: '',
+    (set) => ({
+      userInfo: {
+        userid: 0,
         email: '',
+        iat: 0,
+        exp: 0,
+      },
+      accessToken: '',
+      setAccessToken: (token) => {
+        set({ accessToken: token });
+        const userInfo = jwt.decode(token);
+        if (userInfo) {
+          set({ userInfo: userInfo as IUserInfo });
+        }
+      },
+      setUserInfoInit: () => {
+        set({
+          userInfo: {
+            userid: 0,
+            email: '',
+            iat: 0,
+            exp: 0,
+          },
+          accessToken: '',
+        });
       },
     }),
     {
       name: 'auth-storage',
       storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({ accessToken: state.accessToken }),
+      partialize: (state) => ({
+        userInfo: state.userInfo,
+        accessToken: state.accessToken,
+      }),
     }
   )
 );

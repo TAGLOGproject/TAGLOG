@@ -2,13 +2,15 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
-import { AxiosError } from 'axios';
 import { getPostApi } from '@/service/post';
 import { IPost } from '@/types/api/post';
+import { useRouter } from 'next/navigation';
 
 const useFetchPost = (postId: number) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<IPost | IPost[]>();
+
+  const router = useRouter();
 
   const getPost = useCallback(async () => {
     try {
@@ -17,11 +19,15 @@ const useFetchPost = (postId: number) => {
       const result = await getPostApi(postId);
       setData(result);
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
-      toast.error((error as AxiosError).message);
+      if (error.response.status === 404) {
+        toast.error('Not Found : 올바르지 않은 접근입니다');
+        router.push('/');
+      }
+      toast.error(error.message);
     }
-  }, [postId]);
+  }, [postId, router]);
 
   useEffect(() => {
     getPost();
