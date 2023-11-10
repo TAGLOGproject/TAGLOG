@@ -7,5 +7,5 @@ export default function useEditor() {
     setContents(text);
   };
 
-  return { contents, handleChange };
+  return { contents, setContents, handleChange };
 }

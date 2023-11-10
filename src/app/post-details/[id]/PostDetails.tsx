@@ -9,11 +9,12 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import useStore from '@/store/zustand/useStore';
 import useAuthStore from '@/store/zustand/useAuthStore';
+import useUpdatePostStore from '@/store/zustand/useUpdatePostStore';
 import styles from './postDetails.module.scss';
 
 function PostDetails({ data }: { data: IPost }) {
   const router = useRouter();
-
+  const setPostData = useUpdatePostStore((state) => state.setPostData);
   const userInfo = useStore(useAuthStore, (state) => state.userInfo);
   const userId = String(userInfo?.userid);
 
@@ -22,7 +23,10 @@ function PostDetails({ data }: { data: IPost }) {
   const { title, tags, body, thumbnail, post_id: postId, user } = data;
   const userid = user?.userid;
 
-  const handleUpdatePostClick = () => {};
+  const handleUpdatePostClick = () => {
+    setPostData(data);
+    router.push(`/editor?id=${postId}`);
+  };
 
   const handleDeletePostClick = async () => {
     try {
