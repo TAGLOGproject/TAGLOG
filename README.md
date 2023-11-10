@@ -8,8 +8,6 @@
 | :-------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: |
 | ![다크모드 테마 및 로그인:로그아웃](https://github.com/TAGLOGproject/TAGLOG/assets/115159126/d236518e-f334-43d9-9d65-0320d9469942) | ![게시글 작성,수정,삭제](https://github.com/TAGLOGproject/TAGLOG/assets/115159126/7977868b-68cc-4cf1-8f45-0b68c90c1e04) | ![게시글 필터링](https://github.com/TAGLOGproject/TAGLOG/assets/115159126/5e5ff618-fea8-4fd7-86d8-103bcca6aa80) |
 
-|
-
 ## 2. Deploy 💻
 
 [서비스 바로가기 https://www.taglog.site](https://www.taglog.site/)
@@ -74,7 +72,7 @@ TAGLOG
 - `OAuth2.0 프로토콜을` 활용하였고, 이를 통해 `유저의 편의성`을 높임.
 - 카카오 서버로부터 받은 인가 코드를 `Next.js의 useSearchParams 훅`을 사용하여 클라이언트에 저장.
 - `Token(JWT)방식`을 사용하고, 서버로부터 받은 accessToken을 Local storage에 저장.
-- `유저 정보 및 accessToken`을 `Zunstand`에서 관리하고, `perisist 미들웨어`를 사용해 `localStorage에 저장`함으로서 `새로고침시에도 데이터가 유지`되도록 함
+- `유저 정보 및 accessToken`을 `Zunstand`에서 관리하고, `persist 미들웨어`를 사용해 `localStorage에 저장`함으로서 `새로고침시에도 데이터가 유지`되도록 함
 
 ✅ **Light/Dark 테마 기능 구현**
 
@@ -111,7 +109,7 @@ TAGLOG
 
 - `GitHub Actions`를 활용하여 `CI/CD 파이프라인`을 구축했고, 이를 통해 main 브랜치에 코드 변경 사항이 `자동으로 빌드 및 배포`되며, `지속적인 통합 및 배포`를 실현.
 - 프론트엔드와 백엔드 코드가 함께 동작하는 풀스택 구조를 가지고 있어서 배포 환경을 일관되게 유지하기 위해 `Docker 컨테이너` 사용.
-- PaaS(Pass Platform as a Service) 서비스인 `AWS Elastic Beanstalk`를 사용하여 Docker 컨테이너를 배포하여 인프라 관리를 최소화 함.
+- PaaS(Pass Platform as a Service) 서비스인 `AWS Elastic Beanstalk`를 사용하여 `Docker 컨테이너를 배포`하여 `인프라 관리를 최소화` 함.
 
 ✅ **SSL 및 HTTPS 보안 설정**
 
