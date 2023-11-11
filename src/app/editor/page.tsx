@@ -4,21 +4,17 @@
 'use client';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
-
 import MarkdownIt from 'markdown-it';
 import { useEffect, useState } from 'react';
 import MdEditor from 'react-markdown-editor-lite';
-
 import 'react-markdown-editor-lite/lib/index.css';
 import { toast } from 'react-toastify';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ErrorMessage } from '@hookform/error-message';
 import { createPostApi, updatePostApi } from '@/service/post';
-
 import Tag from '@/components/Tag';
 import { onCustomImageUpload } from '@/utils/frontend/image';
 import useEditor from '@/hooks/useEditor';
-
 import useAuthStore from '@/store/zustand/useAuthStore';
 import useUpdatePostStore from '@/store/zustand/useUpdatePostStore';
 import styles from './editor.module.scss';
@@ -84,7 +80,7 @@ export default function Editor() {
     setTags(filterdTag);
   };
 
-  const createOrUpdatePost: SubmitHandler<IFormValues> = async (values) => {
+  const handlecreateOrUpdatePostClick: SubmitHandler<IFormValues> = async (values) => {
     const { title } = values;
     try {
       const reqBody = {
@@ -122,7 +118,7 @@ export default function Editor() {
   };
 
   return (
-    <form onSubmit={handleSubmit(createOrUpdatePost)} className={styles.container}>
+    <form onSubmit={handleSubmit(handlecreateOrUpdatePostClick)} className={styles.container}>
       <div className={styles.titleContainer}>
         <input
           {...register('title', { required: 'title을 작성해주세요.' })}
