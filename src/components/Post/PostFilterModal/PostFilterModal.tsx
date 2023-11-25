@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import useFilteredPostsStore from '@/store/zustand/useFilteredPostsStore';
 import { TagType } from '@/types/tag';
 import Typography from '@/components/Typography';
-import styles from './postFilter.module.scss';
+import styles from './postFilterModal.module.scss';
 
 const FILTERED_TAGS: TagType[] = ['All', 'Javascript', 'React', 'Typescript', 'Next'];
 
-function PostFilter() {
+function PostFilterModal() {
   const [isOpen, setIsOpen] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -65,4 +65,4 @@ function PostFilter() {
   );
 }
 
-export default PostFilter;
+export default PostFilterModal;

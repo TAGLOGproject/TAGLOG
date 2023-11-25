@@ -3,7 +3,7 @@
 import React from 'react';
 import useFetchPostList from '@/hooks/useFetchPostList';
 import LoadingUI from '../LoadingUI';
-import PostFilter from './PostFilter/PostFilter';
+import PostFilterModal from './PostFilterModal/PostFilterModal';
 import PostList from './PostList/PostList';
 
 function Post() {
@@ -11,7 +11,7 @@ function Post() {
 
   return (
     <>
-      {isLoading ? null : <PostFilter />}
+      {isLoading ? null : <PostFilterModal />}
       {isLoading ? <LoadingUI type="component" /> : <PostList />}
     </>
   );
