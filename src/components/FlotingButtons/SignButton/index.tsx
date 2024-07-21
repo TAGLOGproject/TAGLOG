@@ -8,9 +8,9 @@ import Typography from '@/components/Typography';
 import { signOutApi } from '@/service/sign';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import styles from './SignInButton.module.scss';
+import styles from './SignButton.module.scss';
 
-export default function SignInButton() {
+export default function SignButton() {
   const [isDropdownVisible, setDropdownVisible] = useState<boolean>(false);
 
   const router = useRouter();

@@ -19,7 +19,9 @@ const useAuthStore = create<AuthState>()(
         iat: 0,
         exp: 0,
       },
+
       accessToken: '',
+
       setAccessToken: (token) => {
         set({ accessToken: token });
         const userInfo = jwt.decode(token);
@@ -27,6 +29,7 @@ const useAuthStore = create<AuthState>()(
           set({ userInfo: userInfo as IUserInfo });
         }
       },
+
       setUserInfoInit: () => {
         set({
           userInfo: {

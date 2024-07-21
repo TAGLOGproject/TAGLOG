@@ -1,4 +1,3 @@
-// TODO: 소셜 로그인 UI
 import React from 'react';
 import { KAKAO_AUTH_URL } from '@/constants/backend';
 
