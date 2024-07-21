@@ -32,8 +32,6 @@ export default function SideBar() {
       <Typography variant="body1" className={styles.sidebarsubTitle}>
         FE 개발자들의 블로그 입니다.
       </Typography>
-      <SideBarUserInfo user={MOCK_USER_DATA_1} theme={theme} />
-      <Divider space={8} />
       <SideBarUserInfo user={MOCK_USER_DATA_2} theme={theme} />
       <Divider space={8} />
       <div className={styles.routesContainer}>
